@@ -1,0 +1,61 @@
+
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index
+# An example controller showing how to use dependency injection
+GET     /count                      controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET     /message                    controllers.AsyncController.message
+
+GET     /client                     controllers.ClientController.get
+GET     /vendor                     controllers.VendorController.get
+GET     /itemFull                   controllers.ItemFullController.get
+GET     /vendorComment              controllers.VendorCommentController.get
+GET     /itemCard                   controllers.ItemCardController.get
+GET     /vendorInfo                 controllers.VendorInfoController.get
+GET     /itemComment                controllers.ItemCommentController.get
+GET     /transactionInfo            controllers.TransactionInfoController.get
+GET     /buyInfo                    controllers.BuyInfoController.get
+GET     /user                       controllers.UserController.get
+
+POST     /client                     controllers.ClientController.create
+POST     /vendor                     controllers.VendorController.create
+POST     /itemFull                   controllers.ItemFullController.create
+POST     /vendorComment              controllers.VendorCommentController.create
+POST     /itemCard                   controllers.ItemCardController.create
+POST     /vendorInfo                 controllers.VendorInfoController.create
+POST     /itemComment                controllers.ItemCommentController.create
+POST     /transactionInfo            controllers.TransactionInfoController.create
+POST     /buyInfo                    controllers.BuyInfoController.create
+POST     /user                       controllers.UserController.create
+
+POST     /client                     controllers.ClientController.update
+POST     /vendor                     controllers.VendorController.update
+POST     /itemFull                   controllers.ItemFullController.update
+POST     /vendorComment              controllers.VendorCommentController.update
+POST     /itemCard                   controllers.ItemCardController.update
+POST     /vendorInfo                 controllers.VendorInfoController.update
+POST     /itemComment                controllers.ItemCommentController.update
+POST     /transactionInfo            controllers.TransactionInfoController.update
+POST     /buyInfo                    controllers.BuyInfoController.update
+POST     /user                       controllers.UserController.update
+
+DELETE     /client                     controllers.ClientController.delete
+DELETE     /vendor                     controllers.VendorController.delete
+DELETE     /itemFull                   controllers.ItemFullController.delete
+DELETE     /vendorComment              controllers.VendorCommentController.delete
+DELETE     /itemCard                   controllers.ItemCardController.delete
+DELETE     /vendorInfo                 controllers.VendorInfoController.delete
+DELETE     /itemComment                controllers.ItemCommentController.delete
+DELETE     /transactionInfo            controllers.TransactionInfoController.delete
+DELETE     /buyInfo                    controllers.BuyInfoController.delete
+DELETE     /user                       controllers.UserController.delete
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+      
