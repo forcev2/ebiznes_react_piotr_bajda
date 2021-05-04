@@ -12,9 +12,9 @@ GET     /message                    controllers.AsyncController.message
 
 GET     /client                     controllers.ClientController.get
 GET     /vendor                     controllers.VendorController.get
-GET     /itemFull                   controllers.ItemFullController.get
+GET     /product                   controllers.ProductController.get
 GET     /vendorComment              controllers.VendorCommentController.get
-GET     /itemCard                   controllers.ItemCardController.get
+GET     /itemCard                   controllers.CategoryController.get
 GET     /vendorInfo                 controllers.VendorInfoController.get
 GET     /itemComment                controllers.ItemCommentController.get
 GET     /transactionInfo            controllers.TransactionInfoController.get
@@ -23,9 +23,9 @@ GET     /user                       controllers.UserController.get
 
 POST     /client                     controllers.ClientController.create
 POST     /vendor                     controllers.VendorController.create
-POST     /itemFull                   controllers.ItemFullController.create
+POST     /product                   controllers.ProductController.create
 POST     /vendorComment              controllers.VendorCommentController.create
-POST     /itemCard                   controllers.ItemCardController.create
+POST     /itemCard                   controllers.CategoryController.create
 POST     /vendorInfo                 controllers.VendorInfoController.create
 POST     /itemComment                controllers.ItemCommentController.create
 POST     /transactionInfo            controllers.TransactionInfoController.create
@@ -34,9 +34,9 @@ POST     /user                       controllers.UserController.create
 
 POST     /client                     controllers.ClientController.update
 POST     /vendor                     controllers.VendorController.update
-POST     /itemFull                   controllers.ItemFullController.update
+POST     /product                   controllers.ProductController.update
 POST     /vendorComment              controllers.VendorCommentController.update
-POST     /itemCard                   controllers.ItemCardController.update
+POST     /itemCard                   controllers.CategoryController.update
 POST     /vendorInfo                 controllers.VendorInfoController.update
 POST     /itemComment                controllers.ItemCommentController.update
 POST     /transactionInfo            controllers.TransactionInfoController.update
@@ -45,9 +45,9 @@ POST     /user                       controllers.UserController.update
 
 DELETE     /client                     controllers.ClientController.delete
 DELETE     /vendor                     controllers.VendorController.delete
-DELETE     /itemFull                   controllers.ItemFullController.delete
+DELETE     /product                   controllers.ProductController.delete
 DELETE     /vendorComment              controllers.VendorCommentController.delete
-DELETE     /itemCard                   controllers.ItemCardController.delete
+DELETE     /itemCard                   controllers.CategoryController.delete
 DELETE     /vendorInfo                 controllers.VendorInfoController.delete
 DELETE     /itemComment                controllers.ItemCommentController.delete
 DELETE     /transactionInfo            controllers.TransactionInfoController.delete

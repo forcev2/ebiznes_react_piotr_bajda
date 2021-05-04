@@ -1,5 +1,7 @@
 FROM piotrbajda/pbajda-ecommerce:latest
-COPY ./target/scala-2.12/classes /tmp/target
 EXPOSE 9000
-WORKDIR /tmp/target/classes
-ENTRYPOINT ["sbt","run"]
+EXPOSE 3000
+EXPOSE 5000
+EXPOSE 8080
+#RUN mkdir /home/biz/projekt/sklep
+VOLUME /home/biz/projekt/sklep
