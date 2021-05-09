@@ -1,0 +1,14 @@
+@(product: Form[CreateVendorInfoForm])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.VendorInfoController.add) {
+    @helper.CSRF.formField
+    @inputText(product("description"))
+
+    <div class="buttons">
+        <input type="submit" value="Add Product"/>
+    </div>
+}

@@ -6,6 +6,16 @@ CREATE TABLE "category"
     "name" VARCHAR NOT NULL
 );
 
+ CREATE TABLE "vendor"
+ (
+     "id"           INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+     "company_name" VARCHAR NOT NULL,
+     "user"         INT     NOT NULL,
+     FOREIGN KEY (user) references user (id),
+     "vendor_info"  INT     NOT NULL,
+     FOREIGN KEY (vendor_info) references vendor_info (id)
+ );
+
 CREATE TABLE "product"
 (
     "id"          INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -32,16 +42,6 @@ CREATE TABLE "client"
     "surname" VARCHAR NOT NULL,
     "user"    INT     NOT NULL,
     FOREIGN KEY (user) references user (id)
-);
-
-CREATE TABLE "vendor"
-(
-    "id"           INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "company_name" VARCHAR NOT NULL,
-    "user"         INT     NOT NULL,
-    FOREIGN KEY (user) references user (id),
-    "vendor_info"  INT     NOT NULL,
-    FOREIGN KEY (vendor_info) references vendor_info (id)
 );
 
 CREATE TABLE "vendor_info"

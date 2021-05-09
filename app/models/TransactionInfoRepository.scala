@@ -52,5 +52,17 @@ class TransactionInfoRepository @Inject() (val dbConfigProvider: DatabaseConfigP
   def list(): Future[Seq[TransactionInfo]] = db.run {
     transactionInfo.result
   }
+
+  def getById(id: Int): Future[TransactionInfo] = db.run {
+    transactionInfo.filter(_.id === id).result.head
+  }
+
+  def update(id: Int, arg2: TransactionInfo): Future[Unit] = {
+    val toUpdate: TransactionInfo = arg2.copy(id)
+    db.run(transactionInfo.filter(_.id === id).update(toUpdate)).map(_ => ())
+  }
+
+
+  def delete(id: Int): Future[Unit] = db.run(transactionInfo.filter(_.id === id).delete).map(_ => ())
 }
 

@@ -12,7 +12,7 @@ GET     /message                    controllers.AsyncController.message
 
 GET     /client                     controllers.ClientController.get
 GET     /vendor                     controllers.VendorController.get
-GET     /product                   controllers.ProductController.get
+GET     /product                    controllers.ProductController.getProducts
 GET     /vendorComment              controllers.VendorCommentController.get
 GET     /itemCard                   controllers.CategoryController.get
 GET     /vendorInfo                 controllers.VendorInfoController.get
@@ -21,38 +21,64 @@ GET     /transactionInfo            controllers.TransactionInfoController.get
 GET     /buyInfo                    controllers.BuyInfoController.get
 GET     /user                       controllers.UserController.get
 
-POST     /client                     controllers.ClientController.create
-POST     /vendor                     controllers.VendorController.create
-POST     /product                   controllers.ProductController.create
-POST     /vendorComment              controllers.VendorCommentController.create
-POST     /itemCard                   controllers.CategoryController.create
-POST     /vendorInfo                 controllers.VendorInfoController.create
-POST     /itemComment                controllers.ItemCommentController.create
-POST     /transactionInfo            controllers.TransactionInfoController.create
-POST     /buyInfo                    controllers.BuyInfoController.create
-POST     /user                       controllers.UserController.create
 
-POST     /client                     controllers.ClientController.update
-POST     /vendor                     controllers.VendorController.update
-POST     /product                   controllers.ProductController.update
-POST     /vendorComment              controllers.VendorCommentController.update
-POST     /itemCard                   controllers.CategoryController.update
-POST     /vendorInfo                 controllers.VendorInfoController.update
-POST     /itemComment                controllers.ItemCommentController.update
-POST     /transactionInfo            controllers.TransactionInfoController.update
-POST     /buyInfo                    controllers.BuyInfoController.update
-POST     /user                       controllers.UserController.update
+GET     /addClient                     controllers.ClientController.add
+GET     /addVendor                     controllers.VendorController.add
+GET     /addProduct                    controllers.ProductController.addProduct
+GET     /addVendorComment              controllers.VendorCommentController.add
+GET     /addItemCard                   controllers.CategoryController.add
+GET     /addVendorInfo                 controllers.VendorInfoController.add
+GET     /addItemComment                controllers.ItemCommentController.add
+GET     /addTransactionInfo            controllers.TransactionInfoController.add
+GET     /addBuyInfo                    controllers.BuyInfoController.add
+GET     /addUser                       controllers.UserController.add
 
-DELETE     /client                     controllers.ClientController.delete
-DELETE     /vendor                     controllers.VendorController.delete
-DELETE     /product                   controllers.ProductController.delete
-DELETE     /vendorComment              controllers.VendorCommentController.delete
-DELETE     /itemCard                   controllers.CategoryController.delete
-DELETE     /vendorInfo                 controllers.VendorInfoController.delete
-DELETE     /itemComment                controllers.ItemCommentController.delete
-DELETE     /transactionInfo            controllers.TransactionInfoController.delete
-DELETE     /buyInfo                    controllers.BuyInfoController.delete
-DELETE     /user                       controllers.UserController.delete
+
+GET     /updateProduct/:id                      controllers.ProductController.update(id: Long)
+GET     /updateClient/:id                       controllers.ClientController.update(id: Int)
+GET     /updateVendor/:id                       controllers.VendorController.update(id: Int)
+GET     /updateVendorComment/:id                controllers.VendorCommentController.update(id: Int)
+GET     /updateItemCard/:id                     controllers.CategoryController.update(id: Int)
+GET     /updateVendorInfo/:id                   controllers.VendorInfoController.update(id: Int)
+GET     /updateItemComment/:id                  controllers.ItemCommentController.update(id: Int)
+GET     /updateTransactionInfo/:id              controllers.TransactionInfoController.update(id: Int)
+GET     /updateBuyInfo/:id                      controllers.BuyInfoController.update(id: Int)
+GET     /updateUser/:id                         controllers.UserController.update(id: Int)
+
+
+
+POST     /addClient                     controllers.ClientController.addHandle
+POST     /addVendor                     controllers.VendorController.addHandle
+POST     /addProduct                    controllers.ProductController.addProductHandle
+POST     /addVendorComment              controllers.VendorCommentController.addHandle
+POST     /addItemCard                   controllers.CategoryController.addHandle
+POST     /addVendorInfo                 controllers.VendorInfoController.addHandle
+POST     /addItemComment                controllers.ItemCommentController.addHandle
+POST     /addTransactionInfo            controllers.TransactionInfoController.addHandle
+POST     /addBuyInfo                    controllers.BuyInfoController.addHandle
+POST     /addUser                       controllers.UserController.addHandle
+
+POST     /client                     controllers.ClientController.updateHandle
+POST     /vendor                     controllers.VendorController.updateHandle
+POST     /product                    controllers.ProductController.updateProductHandle
+POST     /vendorComment              controllers.VendorCommentController.updateHandle
+POST     /itemCard                   controllers.CategoryController.updateHandle
+POST     /vendorInfo                 controllers.VendorInfoController.updateHandle
+POST     /itemComment                controllers.ItemCommentController.updateHandle
+POST     /transactionInfo            controllers.TransactionInfoController.updateHandle
+POST     /buyInfo                    controllers.BuyInfoController.updateHandle
+POST     /user                       controllers.UserController.updateHandle
+
+DELETE     /client/:id               controllers.ClientController.delete(id: Int)
+DELETE     /vendor/:id                      controllers.VendorController.delete(id: Int)
+DELETE     /product/delete/:id         controllers.ProductController.delete(id: Long)
+DELETE     /vendorComment/:id               controllers.VendorCommentController.delete(id: Int)
+DELETE     /itemCard/:id                    controllers.CategoryController.delete(id: Int)
+DELETE     /vendorInfo/:id                  controllers.VendorInfoController.delete(id: Int)
+DELETE     /itemComment/:id                 controllers.ItemCommentController.delete(id: Int)
+DELETE     /transactionInfo/:id             controllers.TransactionInfoController.delete(id: Int)
+DELETE     /buyInfo/:id                    controllers.BuyInfoController.delete(id: Int)
+DELETE     /user/:id                        controllers.UserController.delete(id: Int)
 
 
 # Map static resources from the /public folder to the /assets URL path

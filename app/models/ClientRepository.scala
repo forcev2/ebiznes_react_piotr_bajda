@@ -31,17 +31,28 @@ class ClientRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider, 
 
   protected val us = TableQuery[UserTable]
 
-  val buyInfo = TableQuery[ClientTable]
+  val client = TableQuery[ClientTable]
 
   def create(name: String, surname: String, user: Int): Future[Client] = db.run {
-    (buyInfo.map(c => (c.name, c.surname, c.user))
-      returning buyInfo.map(_.id)
+    (client.map(c => (c.name, c.surname, c.user))
+      returning client.map(_.id)
       into {case ((name, surname, user), id )=> Client(id, name, surname, user)}
       ) += (name, surname, user)
   }
 
   def list(): Future[Seq[Client]] = db.run {
-    buyInfo.result
+    client.result
   }
+
+  def getById(id: Int): Future[Client] = db.run {
+    client.filter(_.id === id).result.head
+  }
+
+  def update(id: Int, arg2: Client): Future[Unit] = {
+    val toUpdate: Client = arg2.copy(id)
+    db.run(client.filter(_.id === id).update(toUpdate)).map(_ => ())
+  }
+
+  def delete(id: Int): Future[Unit] = db.run(client.filter(_.id === id).delete).map(_ => ())
 }
 

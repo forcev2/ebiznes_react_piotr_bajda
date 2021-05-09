@@ -1,0 +1,16 @@
+@(product: Form[CreateItemCommentForm])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.ItemCommentController.add) {
+    @helper.CSRF.formField
+    @inputText(product("comment_body"))
+    @inputText(product("product"))
+    @inputText(product("client"))
+
+    <div class="buttons">
+        <input type="submit" value="Add Product"/>
+    </div>
+}

@@ -1,0 +1,17 @@
+@(formSource: Form[CreateBuyInfoForm])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.BuyInfoController.add) {
+    @helper.CSRF.formField
+    @inputText(formSource("date"))
+    @inputText(formSource("address"))
+    @inputText(formSource("total_price"))
+
+
+    <div class="buttons">
+        <input type="submit" value="Add Product"/>
+    </div>
+}

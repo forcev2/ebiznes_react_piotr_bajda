@@ -1,0 +1,16 @@
+@(product: Form[CreateUserForm])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.UserController.add) {
+    @helper.CSRF.formField
+    @inputText(product("username"))
+    @inputText(product("password"))
+    @inputText(product("email"))
+
+    <div class="buttons">
+        <input type="submit" value="Add Product"/>
+    </div>
+}

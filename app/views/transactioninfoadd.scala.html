@@ -1,0 +1,18 @@
+@(product: Form[CreateTransactionInfoForm])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.TransactionInfoController.add) {
+    @helper.CSRF.formField
+    @inputText(product("date"))
+    @inputText(product("product"))
+    @inputText(product("client"))
+    @inputText(product("buy_info"))
+
+
+    <div class="buttons">
+        <input type="submit" value="Add Product"/>
+    </div>
+}

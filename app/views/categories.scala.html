@@ -1,0 +1,7 @@
+@(products: Seq[Category])
+
+@for(product <- products) {
+    <b>@product.name</b>
+    <a href="@controllers.routes.CategoryController.update(product.id)">Edit</a>
+    <a href="@controllers.routes.CategoryController.delete(product.id)">Delete</a>
+}

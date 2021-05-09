@@ -1,0 +1,18 @@
+@(formbody: Form[UpdateTransactionInfoForm])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.TransactionInfoController.updateHandle) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@formbody("id").value" type="hidden" />
+    @inputText(formbody("date"))
+    @inputText(formbody("product"))
+    @inputText(formbody("client"))
+    @inputText(formbody("buy_info"))
+
+    <div class="buttons">
+        <input type="submit" value="Update"/>
+    </div>
+}

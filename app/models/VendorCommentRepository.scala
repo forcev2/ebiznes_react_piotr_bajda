@@ -48,5 +48,16 @@ class VendorCommentRepository @Inject() (val dbConfigProvider: DatabaseConfigPro
   def list(): Future[Seq[VendorComment]] = db.run {
     vendorComment.result
   }
+
+  def getById(id: Int): Future[VendorComment] = db.run {
+    vendorComment.filter(_.id === id).result.head
+  }
+
+  def update(id: Int, arg2: VendorComment): Future[Unit] = {
+    val toUpdate: VendorComment = arg2.copy(id)
+    db.run(vendorComment.filter(_.id === id).update(toUpdate)).map(_ => ())
+  }
+
+  def delete(id: Int): Future[Unit] = db.run(vendorComment.filter(_.id === id).delete).map(_ => ())
 }
 

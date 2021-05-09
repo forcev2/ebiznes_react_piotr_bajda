@@ -1,0 +1,9 @@
+@(products: Seq[User])
+
+@for(product <- products) {
+    <b>@product.username</b>
+    <b>@product.password</b>
+    <b>@product.email</b>
+    <a href="@controllers.routes.UserController.update(product.id)">Edit</a>
+    <a href="@controllers.routes.UserController.delete(product.id)">Delete</a>
+}

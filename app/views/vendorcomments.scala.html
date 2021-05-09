@@ -1,0 +1,9 @@
+@(products: Seq[VendorComment])
+
+@for(product <- products) {
+    <b>@product.comment_body</b>
+    <b>@product.client</b>
+    <b>@product.vendor</b>
+    <a href="@controllers.routes.VendorCommentController.update(product.id)">Edit</a>
+    <a href="@controllers.routes.VendorCommentController.delete(product.id)">Delete</a>
+}

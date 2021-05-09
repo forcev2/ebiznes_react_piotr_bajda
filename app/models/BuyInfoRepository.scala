@@ -40,5 +40,16 @@ class BuyInfoRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
   def list(): Future[Seq[BuyInfo]] = db.run {
     buyInfo.result
   }
+
+  def delete(id: Int): Future[Unit] = db.run(buyInfo.filter(_.id === id).delete).map(_ => ())
+
+  def update(id: Int, new_buyInfo: BuyInfo): Future[Unit] = {
+    val toUpdate: BuyInfo = new_buyInfo.copy(id)
+    db.run(buyInfo.filter(_.id === id).update(toUpdate)).map(_ => ())
+  }
+
+  def getById(id: Int): Future[BuyInfo] = db.run {
+    buyInfo.filter(_.id === id).result.head
+  }
 }
 

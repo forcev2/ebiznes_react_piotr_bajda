@@ -36,5 +36,16 @@ class VendorInfoRepository @Inject() (val dbConfigProvider: DatabaseConfigProvid
   def list(): Future[Seq[VendorInfo]] = db.run {
     vendorInfo.result
   }
+
+  def getById(id: Int): Future[VendorInfo] = db.run {
+    vendorInfo.filter(_.id === id).result.head
+  }
+
+  def update(id: Int, arg2: VendorInfo): Future[Unit] = {
+    val toUpdate: VendorInfo = arg2.copy(id)
+    db.run(vendorInfo.filter(_.id === id).update(toUpdate)).map(_ => ())
+  }
+
+  def delete(id: Int): Future[Unit] = db.run(vendorInfo.filter(_.id === id).delete).map(_ => ())
 }
 

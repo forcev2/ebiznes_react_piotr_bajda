@@ -1,14 +1,71 @@
 package controllers
 
+import models.{ItemComment, ItemCommentRepository}
+import play.api.data.Form
+import play.api.data.Forms.{longNumber, mapping, nonEmptyText, number}
+import play.api.libs.json.Json
+
 import javax.inject._
 import play.api.mvc._
+
+import scala.concurrent.{ExecutionContext, Future}
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class ItemCommentController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class ItemCommentController @Inject()(itemCommentRepository: ItemCommentRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+  val form: Form[CreateItemCommentForm] = Form {
+    mapping(
+      "comment_body" -> nonEmptyText,
+      "product" -> longNumber,
+      "client" -> number,
+    )(CreateItemCommentForm.apply)(CreateItemCommentForm.unapply)
+  }
+
+  val updateForm: Form[UpdateItemCommentForm] = Form {
+    mapping(
+      "id" -> number,
+      "comment_body" -> nonEmptyText,
+      "product" -> longNumber,
+      "client" -> number,
+    )(UpdateItemCommentForm.apply)(UpdateItemCommentForm.unapply)
+  }
+
+  def add: Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+    val result = itemCommentRepository.list()
+
+    result.map (c => Ok(views.html.itemcommentadd(form )))
+  }
+
+  def addHandle = Action.async { implicit request =>
+    form.bindFromRequest.fold(
+      errorForm => {
+        Future.successful(
+          BadRequest(views.html.itemcommentadd(errorForm))
+        )
+      },
+      obj => {
+        itemCommentRepository.create(obj.comment_body, obj.product, obj.client).map { _ =>
+          Redirect(routes.ItemCommentController.add).flashing("success" -> "created")
+        }
+      }
+    )
+
+  }
+
+  def getJSON() = Action.async { implicit request =>
+    itemCommentRepository.list().map { result =>
+      Ok(Json.toJson(result))
+    }
+  }
+
+  def get() = Action.async { implicit request =>
+    itemCommentRepository.list().map { result =>
+      Ok(views.html.itemcomments(result))
+    }
+  }
 
   /**
    * Create an Action to render an HTML page with a welcome message.
@@ -16,20 +73,44 @@ class ItemCommentController @Inject()(cc: ControllerComponents) extends Abstract
    * will be called when the application receives a `GET` request with
    * a path of `/`.
    */
-  def get = Action {
-    Ok("STRING GET")
-  }
-
   def create = Action {
     Ok("STRING Create")
   }
 
-  def update = Action {
-    Ok("STRING Create")
+  def update(id: Int): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+
+    val result = itemCommentRepository.getById(id)
+    result.map(obj => {
+      val prodForm = updateForm.fill(UpdateItemCommentForm(obj.id, obj.comment_body, obj.product, obj.client))
+      //  id, product.name, product.description, product.category)
+      //updateProductForm.fill(prodForm)
+      Ok(views.html.itemcommentupdate(prodForm))
+    })
+
   }
 
-  def delete = Action {
-    Ok("STRING Create")
+  def updateHandle = Action.async { implicit request =>
+
+    updateForm.bindFromRequest.fold(
+      errorForm => {
+        Future.successful(
+          BadRequest(views.html.itemcommentupdate(errorForm))
+        )
+      },
+      obj => {
+        itemCommentRepository.update(obj.id, ItemComment(obj.id, obj.comment_body, obj.product, obj.client)).map { _ =>
+          Redirect(routes.ItemCommentController.update(obj.id)).flashing("success" -> " updated")
+        }
+      }
+    )
+  }
+
+  def delete(id: Int): Action[AnyContent] = Action {
+    itemCommentRepository.delete(id)
+    Redirect("/itemComment")
   }
 
 }
+
+case class CreateItemCommentForm(comment_body: String, product: Long, client: Int)
+case class UpdateItemCommentForm(id: Int, comment_body: String, product: Long, client: Int)

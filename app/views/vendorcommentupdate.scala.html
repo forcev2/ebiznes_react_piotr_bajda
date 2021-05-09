@@ -1,0 +1,17 @@
+@(formbody: Form[UpdateVendorCommentForm])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.VendorCommentController.updateHandle) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@formbody("id").value" type="hidden" />
+    @inputText(formbody("comment_body"))
+    @inputText(formbody("vendor"))
+    @inputText(formbody("client"))
+
+    <div class="buttons">
+        <input type="submit" value="Update"/>
+    </div>
+}

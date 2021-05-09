@@ -37,5 +37,16 @@ class UserRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider)(im
   def list(): Future[Seq[User]] = db.run {
     user.result
   }
+
+  def getById(id: Int): Future[User] = db.run {
+    user.filter(_.id === id).result.head
+  }
+
+  def update(id: Int, arg2: User): Future[Unit] = {
+    val toUpdate: User = arg2.copy(id)
+    db.run(user.filter(_.id === id).update(toUpdate)).map(_ => ())
+  }
+
+  def delete(id: Int): Future[Unit] = db.run(user.filter(_.id === id).delete).map(_ => ())
 }
 

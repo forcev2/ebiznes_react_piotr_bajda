@@ -44,5 +44,16 @@ class ItemCommentRepository @Inject() (val dbConfigProvider: DatabaseConfigProvi
   def list(): Future[Seq[ItemComment]] = db.run {
     itemComment.result
   }
+
+  def getById(id: Int): Future[ItemComment] = db.run {
+    itemComment.filter(_.id === id).result.head
+  }
+
+  def update(id: Int, arg2: ItemComment): Future[Unit] = {
+    val toUpdate: ItemComment = arg2.copy(id)
+    db.run(itemComment.filter(_.id === id).update(toUpdate)).map(_ => ())
+  }
+
+  def delete(id: Int): Future[Unit] = db.run(itemComment.filter(_.id === id).delete).map(_ => ())
 }
 
