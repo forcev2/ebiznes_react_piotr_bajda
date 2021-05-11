@@ -55,6 +55,24 @@ class UserController @Inject()(userRepository: UserRepository, cc: MessagesContr
 
   }
 
+  def addJSON(username: String, password: String, email: String): Action[AnyContent] = Action.async { implicit request =>
+    userRepository.create(username, password, email).map {
+      res => Ok(Json.toJson(res))
+    }
+  }
+
+  def deleteJSON(id: Int): Action[AnyContent] = Action.async { implicit request =>
+    userRepository.delete(id).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
+  def updateJSON(id: Int, username: String, password: String, email: String): Action[AnyContent] = Action.async { implicit request =>
+    userRepository.update(id, new User(id, username, password, email)).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
   def getJSON() = Action.async { implicit request =>
     userRepository.list().map { result =>
       Ok(Json.toJson(result))

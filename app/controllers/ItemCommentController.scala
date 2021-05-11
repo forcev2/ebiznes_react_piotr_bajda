@@ -55,6 +55,24 @@ class ItemCommentController @Inject()(itemCommentRepository: ItemCommentReposito
 
   }
 
+  def addJSON( comment_body: String, product: Long, client: Int): Action[AnyContent] = Action.async { implicit request =>
+    itemCommentRepository.create(comment_body, product, client).map {
+      res => Ok(Json.toJson(res))
+    }
+  }
+
+  def deleteJSON(id: Int): Action[AnyContent] = Action.async { implicit request =>
+    itemCommentRepository.delete(id).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
+  def updateJSON(id: Int, comment_body: String, product: Long, client: Int): Action[AnyContent] = Action.async { implicit request =>
+    itemCommentRepository.update(id, new ItemComment(id,comment_body, product, client)).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
   def getJSON() = Action.async { implicit request =>
     itemCommentRepository.list().map { result =>
       Ok(Json.toJson(result))

@@ -57,6 +57,24 @@ class BuyInfoController @Inject()(buyInfoRepository: BuyInfoRepository, cc: Mess
 
   }
 
+  def addJSON(date: String, address: String, total_price: Int): Action[AnyContent] = Action.async { implicit request =>
+    buyInfoRepository.create(date, address, total_price).map {
+      res => Ok(Json.toJson(res))
+    }
+  }
+
+  def deleteJSON(id: Int): Action[AnyContent] = Action.async { implicit request =>
+    buyInfoRepository.delete(id).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
+  def updateJSON(id: Int, date: String, address: String, total_price: Int): Action[AnyContent] = Action.async { implicit request =>
+    buyInfoRepository.update(id, new BuyInfo(id, date, address, total_price)).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
   def getJSON() = Action.async { implicit request =>
     buyInfoRepository.list().map { result =>
       Ok(Json.toJson(result))

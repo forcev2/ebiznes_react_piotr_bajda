@@ -52,6 +52,24 @@ class CategoryController @Inject()(categoryRepository: CategoryRepository, cc: M
 
   }
 
+  def addJSON(name: String): Action[AnyContent] = Action.async { implicit request =>
+    categoryRepository.create(name).map {
+      res => Ok(Json.toJson(res))
+    }
+  }
+
+  def deleteJSON(id: Int): Action[AnyContent] = Action.async { implicit request =>
+    categoryRepository.delete(id).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
+  def updateJSON(id: Int, name: String): Action[AnyContent] = Action.async { implicit request =>
+    categoryRepository.update(id, new Category(id,name)).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
   def getJSON() = Action.async { implicit request =>
     categoryRepository.list().map { result =>
       Ok(Json.toJson(result))

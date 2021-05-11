@@ -55,6 +55,24 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
 
   }
 
+  def addJSON(company_name: String,  user: Int, vendor_info: Int): Action[AnyContent] = Action.async { implicit request =>
+    vendorRepository.create(company_name, user, vendor_info).map {
+      res => Ok(Json.toJson(res))
+    }
+  }
+
+  def deleteJSON(id: Int): Action[AnyContent] = Action.async { implicit request =>
+    vendorRepository.delete(id).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
+  def updateJSON(id: Int, company_name: String,  user: Int, vendor_info: Int): Action[AnyContent] = Action.async { implicit request =>
+    vendorRepository.update(id, new Vendor(id, company_name, user, vendor_info)).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
   def getJSON() = Action.async { implicit request =>
     vendorRepository.list().map { result =>
       Ok(Json.toJson(result))

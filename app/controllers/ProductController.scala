@@ -63,6 +63,25 @@ class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo:
 
   }
 
+
+  def addJSON( name: String, description: String, category: Int, vendor: Int): Action[AnyContent] = Action.async { implicit request =>
+    productsRepo.create(name, description, category, vendor).map {
+      res => Ok(Json.toJson(res))
+    }
+  }
+
+  def deleteJSON(id: Int): Action[AnyContent] = Action.async { implicit request =>
+    productsRepo.delete(id).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
+  def updateJSON(id: Long, name: String, description: String, category: Int, vendor: Int): Action[AnyContent] = Action.async { implicit request =>
+    productsRepo.update(id, new Product(id, name, description, category, vendor)).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
   def index = Action {
     Ok(views.html.index("Your new application is ready."))
   }

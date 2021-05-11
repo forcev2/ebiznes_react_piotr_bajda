@@ -55,6 +55,24 @@ class ClientController @Inject()(clientRepository: ClientRepository, cc: Message
 
   }
 
+  def addJSON(name: String, surname: String, user: Int): Action[AnyContent] = Action.async { implicit request =>
+    clientRepository.create(name, surname, user).map {
+      res => Ok(Json.toJson(res))
+    }
+  }
+
+  def deleteJSON(id: Int): Action[AnyContent] = Action.async { implicit request =>
+    clientRepository.delete(id).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
+  def updateJSON(id: Int, name: String, surname: String, user: Int): Action[AnyContent] = Action.async { implicit request =>
+    clientRepository.update(id, new Client(id,name, surname, user)).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
   def getJSON() = Action.async { implicit request =>
     clientRepository.list().map { result =>
       Ok(Json.toJson(result))

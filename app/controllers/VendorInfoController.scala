@@ -51,6 +51,24 @@ class VendorInfoController @Inject()(vendorInfoRepository: VendorInfoRepository,
 
   }
 
+  def addJSON(description: String): Action[AnyContent] = Action.async { implicit request =>
+    vendorInfoRepository.create(description).map {
+      res => Ok(Json.toJson(res))
+    }
+  }
+
+  def deleteJSON(id: Int): Action[AnyContent] = Action.async { implicit request =>
+    vendorInfoRepository.delete(id).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
+  def updateJSON(id: Int, description: String): Action[AnyContent] = Action.async { implicit request =>
+    vendorInfoRepository.update(id, new VendorInfo(id, description)).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
   def getJSON() = Action.async { implicit request =>
     vendorInfoRepository.list().map { result =>
       Ok(Json.toJson(result))

@@ -55,6 +55,24 @@ class VendorCommentController @Inject()(vendorCommentRepository: VendorCommentRe
 
   }
 
+  def addJSON( comment_body: String, vendor: Int, client: Int): Action[AnyContent] = Action.async { implicit request =>
+    vendorCommentRepository.create(comment_body, vendor, client).map {
+      res => Ok(Json.toJson(res))
+    }
+  }
+
+  def deleteJSON(id: Int): Action[AnyContent] = Action.async { implicit request =>
+    vendorCommentRepository.delete(id).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
+  def updateJSON(id: Int, comment_body: String, vendor: Int, client: Int): Action[AnyContent] = Action.async { implicit request =>
+    vendorCommentRepository.update(id, new VendorComment(id, comment_body, vendor, client)).map {
+      res => Ok(Json.toJson(id))
+    }
+  }
+
   def getJSON() = Action.async { implicit request =>
     vendorCommentRepository.list().map { result =>
       Ok(Json.toJson(result))
