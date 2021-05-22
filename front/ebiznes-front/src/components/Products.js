@@ -30,7 +30,7 @@ function Products() {
           {responseData && responseData.map(obj => (
             <div className="product-card">
               {obj.name}
-              <div className="card-button">
+              <div className="product-info-button">
                 <Link to={'/product/' + obj.id} >Product Info</Link>
               </div>
             </div>
