@@ -47,6 +47,7 @@ class UserController @Inject()(userRepository: UserRepository, cc: MessagesContr
         )
       },
       obj => {
+        print(obj.username)
         userRepository.create(obj.username, obj.password, obj.email).map { _ =>
           Redirect(routes.UserController.add).flashing("success" -> "created")
         }

@@ -18,7 +18,7 @@ class VendorCommentRepository @Inject() (val dbConfigProvider: DatabaseConfigPro
   import dbConfig._
   import profile.api._
 
-  class VendorCommentTable(tag: Tag) extends Table[VendorComment](tag, "buyInfo") {
+  class VendorCommentTable(tag: Tag) extends Table[VendorComment](tag, "vendor_comment") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def comment_body = column[String]("comment_body")
     def vendor = column[Int]("vendor")

@@ -4,7 +4,7 @@
 
 @flash.get("success").getOrElse("")
 
-@form(routes.VendorController.add) {
+@form(routes.VendorController.addHandle) {
     @helper.CSRF.formField
     @inputText(product("company_name"))
     @inputText(product("user"))

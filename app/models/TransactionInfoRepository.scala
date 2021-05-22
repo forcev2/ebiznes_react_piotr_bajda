@@ -20,7 +20,7 @@ class TransactionInfoRepository @Inject() (val dbConfigProvider: DatabaseConfigP
   import dbConfig._
   import profile.api._
 
-  class TransactionInfoTable(tag: Tag) extends Table[TransactionInfo](tag, "transactionInfo") {
+  class TransactionInfoTable(tag: Tag) extends Table[TransactionInfo](tag, "transaction_info") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def date = column[String]("date")
     def product = column[Long]("product")

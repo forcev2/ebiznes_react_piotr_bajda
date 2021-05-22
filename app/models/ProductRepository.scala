@@ -89,6 +89,11 @@ class ProductRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
     product.result
   }
 
+  def list(id: Long): Future[Seq[Product]] = db.run {
+    print(id)
+    product.filter(_.id === id).result
+  }
+
   def getByCategory(category_id: Int): Future[Seq[Product]] = db.run {
     product.filter(_.category === category_id).result
   }

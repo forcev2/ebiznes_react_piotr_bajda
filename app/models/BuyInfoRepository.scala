@@ -16,7 +16,7 @@ class BuyInfoRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
   import dbConfig._
   import profile.api._
 
-  class BuyInfoTable(tag: Tag) extends Table[BuyInfo](tag, "buyInfo") {
+  class BuyInfoTable(tag: Tag) extends Table[BuyInfo](tag, "buy_info") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def date = column[String]("date")
     def address = column[String]("address")

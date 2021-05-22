@@ -16,7 +16,7 @@ class ItemCommentRepository @Inject() (val dbConfigProvider: DatabaseConfigProvi
   import dbConfig._
   import profile.api._
 
-  class ItemCommentTable(tag: Tag) extends Table[ItemComment](tag, "itemComment") {
+  class ItemCommentTable(tag: Tag) extends Table[ItemComment](tag, "item_comment") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def comment_body = column[String]("comment_body")
     def product = column[Long]("product")
@@ -43,6 +43,10 @@ class ItemCommentRepository @Inject() (val dbConfigProvider: DatabaseConfigProvi
 
   def list(): Future[Seq[ItemComment]] = db.run {
     itemComment.result
+  }
+
+  def list(product: Long): Future[Seq[ItemComment]] = db.run {
+    itemComment.filter(_.product === product).result
   }
 
   def getById(id: Int): Future[ItemComment] = db.run {

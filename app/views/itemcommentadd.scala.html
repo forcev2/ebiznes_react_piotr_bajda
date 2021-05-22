@@ -4,7 +4,7 @@
 
 @flash.get("success").getOrElse("")
 
-@form(routes.ItemCommentController.add) {
+@form(routes.ItemCommentController.addHandle) {
     @helper.CSRF.formField
     @inputText(product("comment_body"))
     @inputText(product("product"))

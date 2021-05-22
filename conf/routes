@@ -14,7 +14,7 @@ GET     /client                     controllers.ClientController.get
 GET     /vendor                     controllers.VendorController.get
 GET     /product                    controllers.ProductController.getProducts
 GET     /vendorComment              controllers.VendorCommentController.get
-GET     /itemCard                   controllers.CategoryController.get
+GET     /category                   controllers.CategoryController.get
 GET     /vendorInfo                 controllers.VendorInfoController.get
 GET     /itemComment                controllers.ItemCommentController.get
 GET     /transactionInfo            controllers.TransactionInfoController.get
@@ -22,11 +22,25 @@ GET     /buyInfo                    controllers.BuyInfoController.get
 GET     /user                       controllers.UserController.get
 
 
+GET     /clientJSON                      controllers.ClientController.getJSON
+GET     /vendorJSON                      controllers.VendorController.getJSON
+GET     /productJSON                     controllers.ProductController.getProductsJSON
+GET     /vendorCommentJSON               controllers.VendorCommentController.getJSON
+GET     /categoryJSON                    controllers.CategoryController.getJSON
+GET     /vendorInfoJSON                  controllers.VendorInfoController.getJSON
+GET     /itemCommentJSON                 controllers.ItemCommentController.getJSON
+GET     /transactionInfoJSON             controllers.TransactionInfoController.getJSON
+GET     /buyInfoJSON                     controllers.BuyInfoController.getJSON
+GET     /userJSON                        controllers.UserController.getJSON
+
+GET     /itemCommentJSON/:product       controllers.ItemCommentController.getSpecificJSON(product: Long)
+GET     /productJSON/:id                controllers.ProductController.getSpecificJSON(id: Long)
+
 GET     /addClient                     controllers.ClientController.add
 GET     /addVendor                     controllers.VendorController.add
 GET     /addProduct                    controllers.ProductController.addProduct
 GET     /addVendorComment              controllers.VendorCommentController.add
-GET     /addItemCard                   controllers.CategoryController.add
+GET     /addCategory                   controllers.CategoryController.add
 GET     /addVendorInfo                 controllers.VendorInfoController.add
 GET     /addItemComment                controllers.ItemCommentController.add
 GET     /addTransactionInfo            controllers.TransactionInfoController.add
@@ -38,7 +52,7 @@ GET     /updateProduct/:id                      controllers.ProductController.up
 GET     /updateClient/:id                       controllers.ClientController.update(id: Int)
 GET     /updateVendor/:id                       controllers.VendorController.update(id: Int)
 GET     /updateVendorComment/:id                controllers.VendorCommentController.update(id: Int)
-GET     /updateItemCard/:id                     controllers.CategoryController.update(id: Int)
+GET     /updateCategory/:id                     controllers.CategoryController.update(id: Int)
 GET     /updateVendorInfo/:id                   controllers.VendorInfoController.update(id: Int)
 GET     /updateItemComment/:id                  controllers.ItemCommentController.update(id: Int)
 GET     /updateTransactionInfo/:id              controllers.TransactionInfoController.update(id: Int)
@@ -51,7 +65,7 @@ POST     /addClient                     controllers.ClientController.addHandle
 POST     /addVendor                     controllers.VendorController.addHandle
 POST     /addProduct                    controllers.ProductController.addProductHandle
 POST     /addVendorComment              controllers.VendorCommentController.addHandle
-POST     /addItemCard                   controllers.CategoryController.addHandle
+POST     /addCategory                  controllers.CategoryController.addHandle
 POST     /addVendorInfo                 controllers.VendorInfoController.addHandle
 POST     /addItemComment                controllers.ItemCommentController.addHandle
 POST     /addTransactionInfo            controllers.TransactionInfoController.addHandle
@@ -62,18 +76,19 @@ POST     /client                     controllers.ClientController.updateHandle
 POST     /vendor                     controllers.VendorController.updateHandle
 POST     /product                    controllers.ProductController.updateProductHandle
 POST     /vendorComment              controllers.VendorCommentController.updateHandle
-POST     /itemCard                   controllers.CategoryController.updateHandle
+POST     /category                   controllers.CategoryController.updateHandle
 POST     /vendorInfo                 controllers.VendorInfoController.updateHandle
 POST     /itemComment                controllers.ItemCommentController.updateHandle
 POST     /transactionInfo            controllers.TransactionInfoController.updateHandle
 POST     /buyInfo                    controllers.BuyInfoController.updateHandle
 POST     /user                       controllers.UserController.updateHandle
 
+
 DELETE     /client/:id               controllers.ClientController.delete(id: Int)
 DELETE     /vendor/:id                      controllers.VendorController.delete(id: Int)
 DELETE     /product/delete/:id         controllers.ProductController.delete(id: Long)
 DELETE     /vendorComment/:id               controllers.VendorCommentController.delete(id: Int)
-DELETE     /itemCard/:id                    controllers.CategoryController.delete(id: Int)
+DELETE     /category/:id                    controllers.CategoryController.delete(id: Int)
 DELETE     /vendorInfo/:id                  controllers.VendorInfoController.delete(id: Int)
 DELETE     /itemComment/:id                 controllers.ItemCommentController.delete(id: Int)
 DELETE     /transactionInfo/:id             controllers.TransactionInfoController.delete(id: Int)

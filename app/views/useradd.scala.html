@@ -4,7 +4,7 @@
 
 @flash.get("success").getOrElse("")
 
-@form(routes.UserController.add) {
+@form(routes.UserController.addHandle) {
     @helper.CSRF.formField
     @inputText(product("username"))
     @inputText(product("password"))

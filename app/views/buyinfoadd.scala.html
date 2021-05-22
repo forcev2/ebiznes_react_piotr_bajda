@@ -4,7 +4,7 @@
 
 @flash.get("success").getOrElse("")
 
-@form(routes.BuyInfoController.add) {
+@form(routes.BuyInfoController.addHandle) {
     @helper.CSRF.formField
     @inputText(formSource("date"))
     @inputText(formSource("address"))

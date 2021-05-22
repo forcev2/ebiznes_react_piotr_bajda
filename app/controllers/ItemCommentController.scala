@@ -79,6 +79,13 @@ class ItemCommentController @Inject()(itemCommentRepository: ItemCommentReposito
     }
   }
 
+  def getSpecificJSON(product: Long) = Action.async { implicit request =>
+    itemCommentRepository.list(product).map { result =>
+      Ok(Json.toJson(result))
+    }
+  }
+
+
   def get() = Action.async { implicit request =>
     itemCommentRepository.list().map { result =>
       Ok(views.html.itemcomments(result))

@@ -4,7 +4,7 @@
 
 @flash.get("success").getOrElse("")
 
-@form(routes.TransactionInfoController.add) {
+@form(routes.TransactionInfoController.addHandle) {
     @helper.CSRF.formField
     @inputText(product("date"))
     @inputText(product("product"))

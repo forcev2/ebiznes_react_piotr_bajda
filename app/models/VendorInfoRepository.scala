@@ -18,7 +18,7 @@ class VendorInfoRepository @Inject() (val dbConfigProvider: DatabaseConfigProvid
   import dbConfig._
   import profile.api._
 
-  class VendorInfoTable(tag: Tag) extends Table[VendorInfo](tag, "vendorInfo") {
+  class VendorInfoTable(tag: Tag) extends Table[VendorInfo](tag, "vendor_info") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def description = column[String]("description")
     def * = (id, description) <> ((VendorInfo.apply _).tupled, VendorInfo.unapply)
