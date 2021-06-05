@@ -14,7 +14,6 @@ function Product(props) {
   const par_id = props.match.params.id;
   let [responseData, setResponseData] = React.useState('');
 
-
   React.useEffect(() => {
     getSpecificProduct(par_id)
       .then((json) => {

@@ -17,9 +17,23 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import ShoppingCartComponent from './components/ShoppingCartComponent';
 
 function App() {
   let [responseData, setResponseData] = React.useState('');
+
+  const [cart, setCart] = useState([]);
+
+  const addToCart = (product) => {
+    console.log(cart);
+    setCart([...cart, product]);
+  };
+
+  const removeFromCart = (product) => {
+    let hardCopy = [...cart];
+    hardCopy = hardCopy.filter((cartItem) => cartItem.id !== product.id);
+    setCart(hardCopy);
+  };
 
   let state = 2;
 
@@ -60,7 +74,7 @@ function App() {
 
           <Switch>
             <Route exact path="/products">
-              <Products />
+              <Products addToCart={addToCart} />
             </Route>
             <Route path="/clients">
               <Clients />
@@ -88,7 +102,9 @@ function App() {
           </Switch>
 
         </header>
-
+        <div className="Basket">
+          <ShoppingCartComponent cart={cart} addToCart={addToCart}></ShoppingCartComponent>
+        </div>
       </div>
     </Router >
   );

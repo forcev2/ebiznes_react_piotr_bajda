@@ -7,8 +7,9 @@ import {
   Link
 } from "react-router-dom";
 
-function Products() {
+function Products(props) {
   let [responseData, setResponseData] = React.useState('');
+  let { addToCart } = props;
 
   React.useEffect(() => {
     getProduct()
@@ -30,9 +31,13 @@ function Products() {
           {responseData && responseData.map(obj => (
             <div className="product-card">
               {obj.name}
-              <div className="product-info-button">
-                <Link to={'/product/' + obj.id} >Product Info</Link>
+              <div className="buttons-product">
+                <div className="product-info-button">
+                  <Link to={'/product/' + obj.id} >Product Info</Link>
+                </div>
+                <button onClick={() => addToCart(obj)} className="add-to-cart-button">Add To Cart</button>
               </div>
+
             </div>
           ))}
         </div>
