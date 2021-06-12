@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import getClients from './services/FetchApi';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './App.css';
 import Products from './components/Products';
 import Clients from './components/Clients';
@@ -11,6 +11,10 @@ import VendorInfo from './components/VendorInfo';
 import AllItemComment from './components/AllItemComment';
 import VendorComment from './components/VendorComment';
 import Product from './components/Product';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
+import SignOut from './components/SignOut';
+import { AuthContext } from './AuthStore'
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,8 +23,10 @@ import {
 } from "react-router-dom";
 import ShoppingCartComponent from './components/ShoppingCartComponent';
 
+
 function App() {
   let [responseData, setResponseData] = React.useState('');
+  const [state, setState] = useContext(AuthContext);
 
   const [cart, setCart] = useState([]);
 
@@ -34,8 +40,6 @@ function App() {
     hardCopy = hardCopy.filter((cartItem) => cartItem.id !== product.id);
     setCart(hardCopy);
   };
-
-  let state = 2;
 
 
   return (
@@ -69,6 +73,20 @@ function App() {
           <div className="menu-item">
             <Link to="/vendor_comment">Vendor Comments</Link>
           </div>
+          {!state.isLoggedIn &&
+            <div className="menu-item push-down">
+              <Link to="/register">Sign Up</Link>
+            </div>
+          }
+          {!state.isLoggedIn &&
+            <div className="menu-item lastItem">
+              <Link to="/login">Sign In</Link>
+            </div>
+          }
+          {state.isLoggedIn &&
+            <SignOut />
+          }
+
         </div>
         <header className="App-header">
 
@@ -98,6 +116,12 @@ function App() {
               <VendorComment />
             </Route>
             <Route path="/product/:id" component={Product} />
+            <Route path="/register">
+              <SignUp />
+            </Route>
+            <Route path="/login">
+              <SignIn />
+            </Route>
 
           </Switch>
 

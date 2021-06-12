@@ -2,7 +2,7 @@ package controllers
 
 import models.{Vendor, VendorRepository}
 import play.api.data.Form
-import play.api.data.Forms.{mapping, nonEmptyText, number}
+import play.api.data.Forms.{longNumber, mapping, nonEmptyText, number}
 import play.api.libs.json.Json
 
 import javax.inject._
@@ -19,7 +19,7 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
   val form: Form[CreateVendorForm] = Form {
     mapping(
       "company_name" -> nonEmptyText,
-      "user" -> number,
+      "user" -> longNumber,
       "vendor_info" -> number,
     )(CreateVendorForm.apply)(CreateVendorForm.unapply)
   }
@@ -28,7 +28,7 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
     mapping(
       "id" -> number,
       "company_name" -> nonEmptyText,
-      "user" -> number,
+      "user" -> longNumber,
       "vendor_info" -> number,
     )(UpdateVendorForm.apply)(UpdateVendorForm.unapply)
   }
@@ -55,7 +55,7 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
 
   }
 
-  def addJSON(company_name: String,  user: Int, vendor_info: Int): Action[AnyContent] = Action.async { implicit request =>
+  def addJSON(company_name: String,  user: Long, vendor_info: Int): Action[AnyContent] = Action.async { implicit request =>
     vendorRepository.create(company_name, user, vendor_info).map {
       res => Ok(Json.toJson(res))
     }
@@ -67,7 +67,7 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
     }
   }
 
-  def updateJSON(id: Int, company_name: String,  user: Int, vendor_info: Int): Action[AnyContent] = Action.async { implicit request =>
+  def updateJSON(id: Int, company_name: String,  user: Long, vendor_info: Int): Action[AnyContent] = Action.async { implicit request =>
     vendorRepository.update(id, new Vendor(id, company_name, user, vendor_info)).map {
       res => Ok(Json.toJson(id))
     }
@@ -132,5 +132,5 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
 }
 
 
-case class CreateVendorForm(company_name: String,  user: Int, vendor_info: Int)
-case class UpdateVendorForm(id: Int, company_name: String,  user: Int, vendor_info: Int)
+case class CreateVendorForm(company_name: String,  user: Long, vendor_info: Int)
+case class UpdateVendorForm(id: Int, company_name: String,  user: Long, vendor_info: Int)

@@ -39,6 +39,8 @@ a{
   width: 220px;
   font-size: 24px;
   background-color: #282c34;
+  display:flex;
+  flex-direction: column;
   color: white;
   -webkit-box-shadow: 5px 0px 14px 0px rgba(0,0,0,0.32); 
   box-shadow: 5px 0px 14px 0px rgba(0,0,0,0.32);
@@ -155,6 +157,53 @@ a{
   -webkit-box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.52); 
   box-shadow: 0px 0px 13px 0px rgba(0,0,0,0.52);
   background-color: #14171b;
+}
+
+.register-bttn{
+  background-color: #14171b;
+}
+
+.register-bttn:hover{
+  background-color: #282c34;
+}
+
+
+label{
+  font-size: 12px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction: column;
+}
+
+.form-control{
+  height: 30px;
+  width: 500px;
+  font-size: 25px;
+  border-radius: 10px;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+.push-down{
+  margin-top: auto;
+}
+
+.lastItem{
+  margin-bottom: 50px;
+}
+
+.ingsoc{
+  width: 250px;
+}
+
+.fb-bttn{
+  background-color: #3b5998;
+}
+
+.ggl-bttn{
+  background-color: #DB4437;
 }
 
 @keyframes App-logo-spin {

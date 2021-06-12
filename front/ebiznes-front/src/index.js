@@ -6,10 +6,13 @@ import Products from './components/Products';
 import Clients from './components/Clients';
 import Vendors from './components/Vendors';
 import reportWebVitals from './reportWebVitals';
+import Store from './AuthStore';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Store>
+      <App />
+    </Store>
   </React.StrictMode>,
   document.getElementById('root')
 );

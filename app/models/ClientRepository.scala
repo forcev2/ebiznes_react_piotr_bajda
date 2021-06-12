@@ -22,7 +22,7 @@ class ClientRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider, 
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name")
     def surname = column[String]("surname")
-    def user = column[Int]("user")
+    def user = column[Long]("user")
     def user_fk = foreignKey("user_fk",user, us)(_.id)
     def * = (id, name, surname, user) <> ((Client.apply _).tupled, Client.unapply)
   }
@@ -33,7 +33,7 @@ class ClientRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider, 
 
   val client = TableQuery[ClientTable]
 
-  def create(name: String, surname: String, user: Int): Future[Client] = db.run {
+  def create(name: String, surname: String, user: Long): Future[Client] = db.run {
     (client.map(c => (c.name, c.surname, c.user))
       returning client.map(_.id)
       into {case ((name, surname, user), id )=> Client(id, name, surname, user)}

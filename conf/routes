@@ -57,7 +57,7 @@ GET     /updateVendorInfo/:id                   controllers.VendorInfoController
 GET     /updateItemComment/:id                  controllers.ItemCommentController.update(id: Int)
 GET     /updateTransactionInfo/:id              controllers.TransactionInfoController.update(id: Int)
 GET     /updateBuyInfo/:id                      controllers.BuyInfoController.update(id: Int)
-GET     /updateUser/:id                         controllers.UserController.update(id: Int)
+GET     /updateUser/:id                         controllers.UserController.update(id: Long)
 
 
 
@@ -93,10 +93,19 @@ DELETE     /vendorInfo/:id                  controllers.VendorInfoController.del
 DELETE     /itemComment/:id                 controllers.ItemCommentController.delete(id: Int)
 DELETE     /transactionInfo/:id             controllers.TransactionInfoController.delete(id: Int)
 DELETE     /buyInfo/:id                    controllers.BuyInfoController.delete(id: Int)
-DELETE     /user/:id                        controllers.UserController.delete(id: Int)
+DELETE     /user/:id                        controllers.UserController.delete(id: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+# Authentication
++nocsrf
+POST        /signUp                                   controllers.auth.SignUpController.signUp
++nocsrf
+POST        /signIn                                   controllers.auth.SignInController.signIn
++nocsrf
+POST        /signOut                                  controllers.auth.SignInController.signOut
+GET         /authenticate/:provider                   controllers.auth.SocialAuthController.authenticate(provider: String)
 
       

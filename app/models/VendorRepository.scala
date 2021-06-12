@@ -21,7 +21,7 @@ class VendorRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
   class VendorTable(tag: Tag) extends Table[Vendor](tag, "vendor") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def company_name = column[String]("company_name")
-    def user = column[Int]("user")
+    def user = column[Long]("user")
     def user_fk = foreignKey("user_fk",user, us)(_.id)
     def vendor_info = column[Int]("vendor_info")
     def vendor_info_fk = foreignKey("vendor_info_fk",vendor_info, ven)(_.id)
@@ -38,7 +38,7 @@ class VendorRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
 
   protected val vendor = TableQuery[VendorTable]
 
-  def create(company_name: String, user: Int, vendor_info: Int): Future[Vendor] = db.run {
+  def create(company_name: String, user: Long, vendor_info: Int): Future[Vendor] = db.run {
     (vendor.map(c => (c.company_name, c.user, c.vendor_info))
       returning vendor.map(_.id)
       into {case ((company_name, user, vendor_info), id) => Vendor(id, company_name, user, vendor_info) }

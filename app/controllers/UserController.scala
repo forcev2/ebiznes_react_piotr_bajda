@@ -1,8 +1,9 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.LoginInfo
 import models.{User, UserRepository}
 import play.api.data.Form
-import play.api.data.Forms.{mapping, nonEmptyText, number}
+import play.api.data.Forms.{longNumber, mapping, nonEmptyText, number}
 import play.api.libs.json.Json
 
 import javax.inject._
@@ -26,17 +27,17 @@ class UserController @Inject()(userRepository: UserRepository, cc: MessagesContr
 
   val updateForm: Form[UpdateUserForm] = Form {
     mapping(
-      "id" -> number,
+      "id" -> longNumber,
       "username" -> nonEmptyText,
       "password" -> nonEmptyText,
       "email" -> nonEmptyText,
     )(UpdateUserForm.apply)(UpdateUserForm.unapply)
   }
 
-  def add: Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
-    val result = userRepository.list()
+  def add: Action[AnyContent] = Action { implicit request: MessagesRequest[AnyContent] =>
+    //val result =
 
-    result.map (c => Ok(views.html.useradd(form )))
+    Ok(views.html.useradd(form ))
   }
 
   def addHandle = Action.async { implicit request =>
@@ -47,7 +48,6 @@ class UserController @Inject()(userRepository: UserRepository, cc: MessagesContr
         )
       },
       obj => {
-        print(obj.username)
         userRepository.create(obj.username, obj.password, obj.email).map { _ =>
           Redirect(routes.UserController.add).flashing("success" -> "created")
         }
@@ -69,21 +69,17 @@ class UserController @Inject()(userRepository: UserRepository, cc: MessagesContr
   }
 
   def updateJSON(id: Int, username: String, password: String, email: String): Action[AnyContent] = Action.async { implicit request =>
-    userRepository.update(id, new User(id, username, password, email)).map {
+    userRepository.update(id, new User(id, new LoginInfo(username, password), email)).map {
       res => Ok(Json.toJson(id))
     }
   }
 
-  def getJSON() = Action.async { implicit request =>
-    userRepository.list().map { result =>
-      Ok(Json.toJson(result))
-    }
+  def getJSON() = Action { implicit request =>
+    Ok("STRING Create")
   }
 
-  def get() = Action.async { implicit request =>
-    userRepository.list().map { result =>
-      Ok(views.html.users(result))
-    }
+  def get() = Action { implicit request =>
+    Ok("STRING Create")
   }
 
   /**
@@ -97,11 +93,11 @@ class UserController @Inject()(userRepository: UserRepository, cc: MessagesContr
     Ok("STRING Create")
   }
 
-  def update(id: Int): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+  def update(id: Long): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
 
     val result = userRepository.getById(id)
     result.map(obj => {
-      val prodForm = updateForm.fill(UpdateUserForm(obj.id, obj.username, obj.password, obj.email))
+      val prodForm = updateForm.fill(UpdateUserForm(1, "", "", obj.email))
       //  id, product.name, product.description, product.category)
       //updateProductForm.fill(prodForm)
       Ok(views.html.userupdate(prodForm))
@@ -118,14 +114,14 @@ class UserController @Inject()(userRepository: UserRepository, cc: MessagesContr
         )
       },
       obj => {
-        userRepository.update(obj.id, User(obj.id, obj.username, obj.password, obj.email)).map { _ =>
+        userRepository.update(obj.id, new User(obj.id, new LoginInfo(obj.username, obj.password), obj.email)).map { _ =>
           Redirect(routes.UserController.update(obj.id)).flashing("success" -> " updated")
         }
       }
     )
   }
 
-  def delete(id: Int): Action[AnyContent] = Action {
+  def delete(id: Long): Action[AnyContent] = Action {
     userRepository.delete(id)
     Redirect("/user")
   }
@@ -133,4 +129,4 @@ class UserController @Inject()(userRepository: UserRepository, cc: MessagesContr
 }
 
 case class CreateUserForm(username: String, password: String, email: String)
-case class UpdateUserForm(id: Int, username: String, password: String, email: String)
+case class UpdateUserForm(id: Long, username: String, password: String, email: String)

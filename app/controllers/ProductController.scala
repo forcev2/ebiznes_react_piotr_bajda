@@ -93,7 +93,6 @@ class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo:
   }
 
   def getSpecificJSON(id: Long) = Action.async { implicit request =>
-    print(id)
     productsRepo.list(id).map { products =>
       Ok(Json.toJson(products))
     }

@@ -1,52 +1,84 @@
 package models
 
+import com.mohiva.play.silhouette.api.LoginInfo
+import com.mohiva.play.silhouette.api.services.IdentityService
+import com.mohiva.play.silhouette.api.util.PasswordInfo
 import javax.inject.{Inject, Singleton}
+import models.User
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
-//import slick.lifted.{TableQuery, Tag}
-//import slick.model.Table
 
 import scala.concurrent.{ExecutionContext, Future}
-
-
+import scala.reflect.ClassTag
 
 @Singleton
-class UserRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
+class UserRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext, implicit val classTag: ClassTag[PasswordInfo]) extends IdentityService[User] {
   val dbConfig = dbConfigProvider.get[JdbcProfile]
 
   import dbConfig._
   import profile.api._
 
-  class UserTable(tag: Tag) extends Table[User](tag, "user") {
-    def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
-    def username = column[String]("username")
-    def password = column[String]("password")
+  case class UserDto(id: Long, providerId: String, providerKey: String, email: String)
+
+  class UserTable(tag: Tag) extends Table[UserDto](tag, "user") {
+    def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+
+    def providerId = column[String]("providerId")
+
+    def providerKey = column[String]("providerKey")
+
     def email = column[String]("email")
-    def * = (id, username, password, email) <> ((User.apply _).tupled, User.unapply)
+
+    def * = (id, providerId, providerKey, email) <> ((UserDto.apply _).tupled, UserDto.unapply)
   }
 
   val user = TableQuery[UserTable]
 
-  def create(username: String, password: String, email: String): Future[User] = db.run {
-    (user.map(c => (c.username, c.password, c.email))
+  override def retrieve(loginInfo: LoginInfo): Future[Option[User]] = db.run {
+    user.filter(_.providerId === loginInfo.providerID)
+      .filter(_.providerKey === loginInfo.providerKey)
+      .result
+      .headOption
+  }.map(_.map(dto => toModel(dto)))
+
+  def create(providerId: String, providerKey: String, email: String): Future[User] = db.run {
+    (user.map(c => (c.providerId, c.providerKey, c.email))
       returning user.map(_.id)
-      into {case ((username, password, email), id )=> User(id, username, password, email)}
-      ) += (username, password, email)
-  }
+      into { case ((providerId, providerKey, email), id) => UserDto(id, providerId, providerKey, email) }
+      ) += (providerId, providerKey, email)
+  }.map(dto => toModel(dto))
 
-  def list(): Future[Seq[User]] = db.run {
+  def getAll: Future[Seq[User]] = db.run {
     user.result
-  }
+  }.map(_.map(dto => toModel(dto)))
 
-  def getById(id: Int): Future[User] = db.run {
+  def getByIdOption(id: Long): Future[Option[User]] = db.run {
+    user.filter(_.id === id).result.headOption
+  }.map(_.map(dto => toModel(dto)))
+
+  def getById(id: Long): Future[User] = db.run {
     user.filter(_.id === id).result.head
+  }.map(dto => toModel(dto))
+
+  def update(id: Long, newUser: User): Future[User] = {
+    val userToUpdate = newUser.copy(id)
+    db.run {
+      user.filter(_.id === id)
+        .update(toDto(userToUpdate))
+        .map(_ => userToUpdate)
+    }
   }
 
-  def update(id: Int, arg2: User): Future[Unit] = {
-    val toUpdate: User = arg2.copy(id)
-    db.run(user.filter(_.id === id).update(toUpdate)).map(_ => ())
-  }
+  def delete(id: Long): Future[Unit] =
+    db.run {
+      user.filter(_.id === id)
+        .delete
+        .map(_ => ())
+    }
 
-  def delete(id: Int): Future[Unit] = db.run(user.filter(_.id === id).delete).map(_ => ())
+  private def toModel(dto: UserDto): User =
+    User(dto.id, LoginInfo(dto.providerId, dto.providerKey), dto.email)
+
+  private def toDto(model: User): UserDto =
+    UserDto(model.id, model.loginInfo.providerID, model.loginInfo.providerKey, model.email)
 }
-

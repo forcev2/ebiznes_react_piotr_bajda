@@ -2,7 +2,7 @@ package controllers
 
 import models.{Client, ClientRepository}
 import play.api.data.Form
-import play.api.data.Forms.{mapping, nonEmptyText, number}
+import play.api.data.Forms.{longNumber, mapping, nonEmptyText, number}
 import play.api.libs.json.Json
 
 import javax.inject._
@@ -20,7 +20,7 @@ class ClientController @Inject()(clientRepository: ClientRepository, cc: Message
     mapping(
       "name" -> nonEmptyText,
       "surname" -> nonEmptyText,
-      "user" -> number,
+      "user" -> longNumber,
     )(CreateClientForm.apply)(CreateClientForm.unapply)
   }
 
@@ -29,7 +29,7 @@ class ClientController @Inject()(clientRepository: ClientRepository, cc: Message
       "id" -> number,
       "name" -> nonEmptyText,
       "surname" -> nonEmptyText,
-      "user" -> number,
+      "user" -> longNumber,
     )(UpdateClientForm.apply)(UpdateClientForm.unapply)
   }
 
@@ -55,7 +55,7 @@ class ClientController @Inject()(clientRepository: ClientRepository, cc: Message
 
   }
 
-  def addJSON(name: String, surname: String, user: Int): Action[AnyContent] = Action.async { implicit request =>
+  def addJSON(name: String, surname: String, user: Long): Action[AnyContent] = Action.async { implicit request =>
     clientRepository.create(name, surname, user).map {
       res => Ok(Json.toJson(res))
     }
@@ -67,7 +67,7 @@ class ClientController @Inject()(clientRepository: ClientRepository, cc: Message
     }
   }
 
-  def updateJSON(id: Int, name: String, surname: String, user: Int): Action[AnyContent] = Action.async { implicit request =>
+  def updateJSON(id: Int, name: String, surname: String, user: Long): Action[AnyContent] = Action.async { implicit request =>
     clientRepository.update(id, new Client(id,name, surname, user)).map {
       res => Ok(Json.toJson(id))
     }
@@ -131,5 +131,5 @@ class ClientController @Inject()(clientRepository: ClientRepository, cc: Message
 
 }
 
-case class CreateClientForm( name: String, surname: String, user: Int)
-case class UpdateClientForm(id: Int, name: String, surname: String, user: Int)
+case class CreateClientForm( name: String, surname: String, user: Long)
+case class UpdateClientForm(id: Int, name: String, surname: String, user: Long)

@@ -11,7 +11,6 @@ function ItemComments(props) {
     getItemCommentsByProductId(product_id)
       .then((json) => {
         setResponseData(json)
-        console.log(responseData)
       })
       .catch((error) => {
         console.log(error)
