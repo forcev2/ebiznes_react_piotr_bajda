@@ -73,8 +73,11 @@ function App() {
           <div className="menu-item">
             <Link to="/vendor_comment">Vendor Comments</Link>
           </div>
+          <div className="padding-menu">
+
+          </div>
           {!state.isLoggedIn &&
-            <div className="menu-item push-down">
+            <div className="menu-item">
               <Link to="/register">Sign Up</Link>
             </div>
           }

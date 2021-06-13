@@ -20,13 +20,12 @@ function ItemComments(props) {
   return (
     <div className="ItemComments">
       <pre>
-        <ul>
-          {responseData && responseData.map(obj => (
-            <div className="product-card">
-              {obj.comment_body}
-            </div>
-          ))}
-        </ul>
+
+        {responseData && responseData.map(obj => (
+          <div className="product-card product-comment">
+            {obj.comment_body}
+          </div>
+        ))}
       </pre>
     </div>
   );

@@ -1,5 +1,6 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import models.{ItemComment, ItemCommentRepository}
 import play.api.data.Form
 import play.api.data.Forms.{longNumber, mapping, nonEmptyText, number}
@@ -60,6 +61,7 @@ class ItemCommentController @Inject()(itemCommentRepository: ItemCommentReposito
       res => Ok(Json.toJson(res))
     }
   }
+
 
   def deleteJSON(id: Int): Action[AnyContent] = Action.async { implicit request =>
     itemCommentRepository.delete(id).map {

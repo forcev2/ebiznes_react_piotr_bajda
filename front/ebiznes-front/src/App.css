@@ -101,6 +101,10 @@ a{
   overflow-wrap: normal;
 }
 
+.product-comment{
+  
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -110,6 +114,10 @@ a{
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.padding-menu{
+  height: 250px;
 }
 
 .App-header {
@@ -202,8 +210,21 @@ label{
   background-color: #3b5998;
 }
 
+.comment-inp{
+  width: 631px;
+  height: 120px;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 20px;
+}
+
 .ggl-bttn{
   background-color: #DB4437;
+}
+
+.comment-write-wrapper{
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes App-logo-spin {

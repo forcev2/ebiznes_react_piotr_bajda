@@ -2,7 +2,8 @@ package controllers.auth
 
 import com.mohiva.play.silhouette.api._
 import com.mohiva.play.silhouette.impl.providers._
-import controllers.auth.{DefaultSilhouetteControllerComponents, SilhouetteController}
+import controllers.auth.DefaultSilhouetteControllerComponents
+import controllers.auth.DefaultSilhouetteControllerComponents
 import controllers.auth.SignUpRequest
 import models.{AuthTokenRepository, UserRepository}
 

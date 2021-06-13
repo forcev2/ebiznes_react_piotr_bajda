@@ -91,7 +91,6 @@ export function signOut() {
     const route = "signOut";
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
     };
     return fetch(host + route, requestOptions)
@@ -105,6 +104,19 @@ export function signInGoogle() {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
+        mode: 'cors',
+    };
+    return fetch(host + route, requestOptions)
+}
+
+
+export function addComment(commentBody, productId) {
+    const host = "http://localhost:12345/"
+    const route = "addJSON/" + commentBody + "/" + productId + "/" + 0;
+    console.log(route);
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         mode: 'cors',
     };
     return fetch(host + route, requestOptions)

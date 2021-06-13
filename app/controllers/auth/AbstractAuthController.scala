@@ -1,7 +1,6 @@
 package controllers.auth
 
 import com.mohiva.play.silhouette.api.services.AuthenticatorResult
-import controllers.auth.SilhouetteController
 import controllers.auth.DefaultSilhouetteControllerComponents
 import models.User
 import play.api.mvc._

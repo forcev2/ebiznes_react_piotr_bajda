@@ -20,7 +20,7 @@ export default function SignOut() {
     }
 
     return (
-        <div className="menu-item push-down lastItem" onClick={signOut}>
+        <div className="menu-item lastItem" onClick={signOut}>
             SignOut
         </div>
     )

@@ -36,6 +36,8 @@ GET     /userJSON                        controllers.UserController.getJSON
 GET     /itemCommentJSON/:product       controllers.ItemCommentController.getSpecificJSON(product: Long)
 GET     /productJSON/:id                controllers.ProductController.getSpecificJSON(id: Long)
 
+
+
 GET     /addClient                     controllers.ClientController.add
 GET     /addVendor                     controllers.VendorController.add
 GET     /addProduct                    controllers.ProductController.addProduct
@@ -71,6 +73,9 @@ POST     /addItemComment                controllers.ItemCommentController.addHan
 POST     /addTransactionInfo            controllers.TransactionInfoController.addHandle
 POST     /addBuyInfo                    controllers.BuyInfoController.addHandle
 POST     /addUser                       controllers.UserController.addHandle
+
++nocsrf
+POST     /addJSON/:comment_body/:product/:client   controllers.ItemCommentController.addJSON(comment_body: String, product: Long, client: Int)
 
 POST     /client                     controllers.ClientController.updateHandle
 POST     /vendor                     controllers.VendorController.updateHandle
