@@ -33,6 +33,16 @@ jobs:
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_36c242ada98145dc949fc76d1b9d0d9d }}/pbajda-ecommerce:${{ github.sha }}
         file: ./Dockerfile
         
+    - name: SBT Action
+      # You may pin to the exact commit or the version.
+      # uses: lokkju/github-action-sbt@1773266342dbc0df0c3aa36e6dc3ef80c72b5121
+      uses: lokkju/github-action-sbt@v0.2.2
+      with:
+        # SBT commands
+        commands: run
+        # relative path to the directory containing your build.sbt, if it is not in the root of your repository
+        sbt_project_directory: /home/biz/projekt/sklep
+        
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,6 +61,3 @@ jobs:
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_f2a27bfef84c4b49b249d33efb066da8 }}
         images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_36c242ada98145dc949fc76d1b9d0d9d }}/pbajda-ecommerce:${{ github.sha }}'
         
-    - name: Docker compose run
-      run:
-        sbt run
