@@ -42,6 +42,7 @@ jobs:
         # Commands to run
         command: run
         # A directory to run SBT in
+        working-directory: .
         # docker login username
         docker-login-username: secrets.AzureAppService_ContainerUsername_36c242ada98145dc949fc76d1b9d0d9d
         # docker login password
