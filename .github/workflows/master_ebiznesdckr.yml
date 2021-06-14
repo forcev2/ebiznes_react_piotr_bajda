@@ -32,6 +32,10 @@ jobs:
         push: true
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_36c242ada98145dc949fc76d1b9d0d9d }}/pbajda-ecommerce:${{ github.sha }}
         file: ./Dockerfile
+        
+    - name: Docker compose run
+      run:
+        docker-compose up
 
   deploy:
     runs-on: ubuntu-latest
