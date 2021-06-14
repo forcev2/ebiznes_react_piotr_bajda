@@ -33,15 +33,23 @@ jobs:
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_36c242ada98145dc949fc76d1b9d0d9d }}/pbajda-ecommerce:${{ github.sha }}
         file: ./Dockerfile
         
-    - name: SBT Action
+        
+    - name: Scala SBT Action
       # You may pin to the exact commit or the version.
-      # uses: lokkju/github-action-sbt@1773266342dbc0df0c3aa36e6dc3ef80c72b5121
-      uses: lokkju/github-action-sbt@v0.2.2
+      # uses: matankdr/github-docker-sbt@27084250a313a5ddb0ab671248e4489e057bf3bc
+      uses: matankdr/github-docker-sbt@JDK8-SBT1.3.8
       with:
-        # SBT commands
-        commands: run
-        # relative path to the directory containing your build.sbt, if it is not in the root of your repository
-        sbt_project_directory: /home/biz/projekt/sklep
+        # Commands to run
+        command: run
+        # A directory to run SBT in
+        working-directory: /home/biz/projekt/sklep
+        # docker login username
+        docker-login-username: secrets.AzureAppService_ContainerUsername_36c242ada98145dc949fc76d1b9d0d9d
+        # docker login password
+        docker-login-password: secrets.AzureAppService_ContainerPassword_438ae408bab4431ea9e7c6718c09bde9
+        # docker registry, defaults to DockerHub
+  
+        
         
 
   deploy:
