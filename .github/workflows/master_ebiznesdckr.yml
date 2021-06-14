@@ -34,6 +34,7 @@ jobs:
         file: ./Dockerfile
       run:
         docker-compose up
+        
       
   deploy:
     runs-on: ubuntu-latest
