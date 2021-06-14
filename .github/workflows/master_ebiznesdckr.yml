@@ -33,9 +33,6 @@ jobs:
         tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_36c242ada98145dc949fc76d1b9d0d9d }}/pbajda-ecommerce:${{ github.sha }}
         file: ./Dockerfile
         
-    - name: Docker compose run
-      run:
-        sbt run
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,3 +50,7 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_f2a27bfef84c4b49b249d33efb066da8 }}
         images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_36c242ada98145dc949fc76d1b9d0d9d }}/pbajda-ecommerce:${{ github.sha }}'
+        
+    - name: Docker compose run
+      run:
+        sbt run
