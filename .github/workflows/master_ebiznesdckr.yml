@@ -35,7 +35,7 @@ jobs:
         
     - name: Docker compose run
       run:
-        docker-compose up
+        sbt run
 
   deploy:
     runs-on: ubuntu-latest
