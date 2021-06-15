@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_589f1acd3996459fb1a18c22e00a16b4 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_3601b9a36a0c491b959d9abfa1beac65 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_ad2a2c1eb91c44f19a484858adedc293 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_302fde387a924e328d4d863f84c03a38 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_589f1acd3996459fb1a18c22e00a16b4 }}/pbajda-ecommerce:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_ad2a2c1eb91c44f19a484858adedc293 }}/pbajda-ecommerce:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'ebiznesdckrpb'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_6e868bf1ead24d2babfe7ce5fecdb8bd }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_589f1acd3996459fb1a18c22e00a16b4 }}/pbajda-ecommerce:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_859d44b1e3a246d9ad5ce694b7fdb663 }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_ad2a2c1eb91c44f19a484858adedc293 }}/pbajda-ecommerce:${{ github.sha }}'
