@@ -27,11 +27,10 @@ jobs:
         password: ${{ secrets.AzureAppService_ContainerPassword_8a4fa6a09e8e4c0f8d0e911774248448 }}
 
     - name: Build and push container image to registry
-      context: .
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_d429fb02682548868a83b07edce12622 }}/piotrbajda/pbajda-ecommerce:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_d429fb02682548868a83b07edce12622 }}/pbajda-ecommerce:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
