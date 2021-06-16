@@ -32,7 +32,7 @@ RUN rm sbt-1.4.8.deb
 RUN apt-get update
 RUN apt-get install sbt
 
-
+#port 3000 9000
 #port
 EXPOSE 9000 3000
 
