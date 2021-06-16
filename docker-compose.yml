@@ -9,4 +9,4 @@ services:
     volumes:
       - .:/home/biz/projekt/sklep
     working_dir: /home/biz/projekt/sklep
-    command: bash -c "source sbt run && sudo apt-get install sqlite3 libsqlite3-dev"
+    command: bash -c "sbt run && sudo apt-get instal sqlite3 libsqlite3-dev"
