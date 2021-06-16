@@ -33,9 +33,8 @@ RUN apt-get update
 RUN apt-get install sbt
 
 
-#porty
-EXPOSE 3000
-EXPOSE 9000
+#port
+EXPOSE 9000 3000
 
 
 
