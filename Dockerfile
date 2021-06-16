@@ -36,7 +36,7 @@ RUN apt-get install sbt
 #port
 EXPOSE 9000 3000
 
-ENTRYPOINT bash sbt run
+ENTRYPOINT bash /etc/sbt run
 
 
 
