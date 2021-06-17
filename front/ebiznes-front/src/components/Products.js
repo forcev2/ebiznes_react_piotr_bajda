@@ -19,7 +19,7 @@ function Products(props) {
       .catch((error) => {
         console.log(error)
       })
-  }, [setResponseData, responseData])
+  }, [,])
 
   return (
     <div className="Product">
