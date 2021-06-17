@@ -39,5 +39,5 @@ EXPOSE 9000
 
 WORKDIR .
 
-RUN /usr/local/sbt/bin/sbt package
-ENTRYPOINT bash /usr/local/sbt/bin/sbt run
+RUN /usr/local/sbt/bin/sbt package -Dsbt.rootdir=true
+ENTRYPOINT bash /usr/local/sbt/bin/sbt run -Dsbt.rootdir=true
