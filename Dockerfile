@@ -43,5 +43,5 @@ RUN /usr/local/sbt/bin/sbt package -Dsbt.rootdir=true
 ENTRYPOINT ls && \
            ls /project && \
            ls /home && \
-           find . -path ./proc -prune -false -o -name Module.scala && \
+           find . -path ./proc -prune -false -o -name *.scala && \
            bash /usr/local/sbt/bin/sbt run -Dsbt.rootdir=true
