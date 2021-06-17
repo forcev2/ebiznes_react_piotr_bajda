@@ -39,6 +39,8 @@ EXPOSE 9000
 
 WORKDIR .
 
+COPY . .
+
 RUN /usr/local/sbt/bin/sbt package -Dsbt.rootdir=true
 ENTRYPOINT ls && \
            ls /project && \
