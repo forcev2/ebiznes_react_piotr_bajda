@@ -37,4 +37,4 @@ EXPOSE 3000
 EXPOSE 9000
 
 
-ENTRYPOINT sbt run
+ENTRYPOINT bash sbt run
