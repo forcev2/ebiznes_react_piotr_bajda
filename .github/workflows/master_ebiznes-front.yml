@@ -1,0 +1,38 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Node.js app to Azure Web App - ebiznes-front
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js version
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+        
+    - name: npm install, build, and test
+      run: |
+        CI=false npm install
+        CI=false npm run build --if-present
+      working-directory: ./front/ebiznes-front
+      
+
+    - name: 'Deploy to Azure Web App'
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'ebiznes-front'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_095f220a62064f52ba3b193e6cfc6ec3 }}
+        package: .
