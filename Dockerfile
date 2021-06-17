@@ -37,7 +37,7 @@ RUN wget -qO - --no-check-certificate "https://github.com/sbt/sbt/releases/downl
 EXPOSE 3000
 EXPOSE 9000
 
-WORKDIR /biz
+WORKDIR /src
 
 RUN /usr/local/sbt/bin/sbt package
 ENTRYPOINT bash /usr/local/sbt/bin/sbt run
