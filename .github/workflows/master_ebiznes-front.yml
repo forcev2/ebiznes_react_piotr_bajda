@@ -23,18 +23,9 @@ jobs:
         
     - name: npm install, build, and test
       run: |
-        npm install
-        npm run build --if-present
+        CI=false npm install
+        CI=false npm run build --if-present
       working-directory: ./front/ebiznes-front
-      
-      
-    - task: PublishBuildArtifacts@1
-      displayName: Publish log
-      condition: always()
-      inputs:
-        pathToPublish: "C:\npm\cache\_logs"
-        artifactName: log
-        artifactType: container
       
 
     - name: 'Deploy to Azure Web App'
