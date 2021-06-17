@@ -30,6 +30,7 @@ RUN apt install -y npm
 #RUN rm sbt-1.4.8.deb
 #RUN apt-get update
 #RUN apt-get install sbt
+RUN mkdir -p "/usr/local/sbt"
 RUN wget -qO - --no-check-certificate "https://github.com/sbt/sbt/releases/download/v1.4.8/sbt-1.4.8.tgz" | tar xz -C /usr/local/sbt --strip-components=1
 
 #porty
