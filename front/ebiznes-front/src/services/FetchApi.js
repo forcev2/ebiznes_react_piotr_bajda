@@ -64,7 +64,7 @@ export function getUser() {
 
 
 export function signUp(email, password) {
-    const host = "http://localhost:12345/"
+    const host = "https://ebiznesdckrpb.azurewebsites.net/"
     const route = "signUp";
     const requestOptions = {
         method: 'POST',
@@ -75,7 +75,7 @@ export function signUp(email, password) {
 }
 
 export function signIn(email, password) {
-    const host = "http://localhost:12345/"
+    const host = "https://ebiznesdckrpb.azurewebsites.net/"
     const route = "signIn";
     const requestOptions = {
         method: 'POST',
@@ -87,7 +87,7 @@ export function signIn(email, password) {
 }
 
 export function signOut() {
-    const host = "http://localhost:12345/"
+    const host = "https://ebiznesdckrpb.azurewebsites.net/"
     const route = "signOut";
     const requestOptions = {
         method: 'POST',
@@ -98,7 +98,7 @@ export function signOut() {
 
 //G_AUTHUSER_H
 export function signInGoogle() {
-    const host = "http://localhost:12345/"
+    const host = "https://ebiznesdckrpb.azurewebsites.net/"
     const route = "authenticate/google";
     const requestOptions = {
         method: 'GET',
@@ -111,7 +111,7 @@ export function signInGoogle() {
 
 
 export function addComment(commentBody, productId) {
-    const host = "http://localhost:12345/"
+    const host = "https://ebiznesdckrpb.azurewebsites.net/"
     const route = "addJSON/" + commentBody + "/" + productId + "/" + 0;
     console.log(route);
     const requestOptions = {
@@ -123,7 +123,7 @@ export function addComment(commentBody, productId) {
 }
 
 function fetchData(route) {
-    const host = "http://localhost:12345/"
+    const host = "https://ebiznesdckrpb.azurewebsites.net/"
 
     return fetch(host + route).then((response) => response.json())
 }
