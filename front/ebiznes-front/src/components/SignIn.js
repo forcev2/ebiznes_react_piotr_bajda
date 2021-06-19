@@ -5,6 +5,7 @@ import { AuthContext } from '../AuthStore'
 import { GoogleLogin } from 'react-google-login';
 import GoogleSignIn from './GoogleSignIn';
 import FacebookSignIn from './FacebookSignIn';
+import Cookies from 'js-cookie';
 
 export default function SignIn() {
     let [someEmpty, setSomeEmpty] = React.useState(false);
@@ -42,6 +43,8 @@ export default function SignIn() {
                     }
                     else {
                         setRedirect(true);
+                        const authenticator = Cookies.get("authenticator");
+                        console.log(authenticator);
                         localStorage.setItem('email', email);
                         setState({ email: email, isLoggedIn: true });
                     }
