@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../AuthStore'
 import { signOut as signOutFetch } from '../services/FetchApi';
+import Cookies from 'js-cookie';
 
 export default function SignOut() {
     const [state, setState] = useContext(AuthContext)
@@ -9,6 +10,11 @@ export default function SignOut() {
         signOutFetch().then((response) => {
             if (response.status != 200) {
                 console.log("Already Logged In")
+
+                const authenticator = Cookies.get("authenticator");
+                if (authenticator) {
+                    setState({ email: '', isLoggedIn: true });
+                }
             }
             else {
                 localStorage.removeItem('email');
