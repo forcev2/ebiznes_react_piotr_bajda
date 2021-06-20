@@ -35,21 +35,29 @@ export default function SignIn() {
 
             if (!someEmpty) {
                 console.log("GOT HERE ", someEmpty)
-                signInFetch(email, password).then((response) => {
-                    if (response.status == 403) {
-                        console.log("wrong creditials")
-                        console.log(response);
-                        setWrongCreditials(true);
-                    }
-                    else {
-                        setRedirect(true);
-                        const authenticator = Cookies.get("authenticator");
-                        console.log(authenticator);
-                        localStorage.setItem('email', email);
+                signInFetch(email, password)
+                    .then((response) => {
+                        if (response.status == 403) {
+                            console.log("wrong creditials")
+                            console.log(response);
+                            setWrongCreditials(true);
+                        }
+                        else {
+                            return response.json()
+                            const authenticator = Cookies.get("authenticator");
+                            console.log(authenticator);
+                            localStorage.setItem('email', email);
+                            setState({ email: email, isLoggedIn: true });
+                            setRedirect(true);
+                        }
+                        //console.log("from server login ", response);
+                    })
+                    .then((data) => {
+                        console.log("data ", data);
+                        localStorage.setItem(data[0], data[1]);
                         setState({ email: email, isLoggedIn: true });
-                    }
-                    console.log("from server login ", response);
-                })
+                        setRedirect(true);
+                    });
             }
 
         }

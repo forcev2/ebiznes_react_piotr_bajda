@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 export function getClients() {
     const route = "clientJSON";
 
@@ -65,6 +67,7 @@ export function getUser() {
 
 export function signUp(email, password) {
     const host = "https://ebiznesdckrpb.azurewebsites.net/"
+    //const host = "http://localhost:12345/"
     const route = "signUp";
     const requestOptions = {
         method: 'POST',
@@ -76,6 +79,7 @@ export function signUp(email, password) {
 
 export function signIn(email, password) {
     const host = "https://ebiznesdckrpb.azurewebsites.net/"
+    //const host = "http://localhost:12345/"
     const route = "signIn";
     const requestOptions = {
         method: 'POST',
@@ -86,12 +90,19 @@ export function signIn(email, password) {
     return fetch(host + route, requestOptions)
 }
 
+//"csrfToken"
 export function signOut() {
     const host = "https://ebiznesdckrpb.azurewebsites.net/"
+    //const host = "http://localhost:12345/"
     const route = "signOut";
+    const token = localStorage.getItem("csrfToken");
+    console.log("Using token csrfToken " + token)
+    Cookies.set("csrfToken", token);
     const requestOptions = {
         method: 'POST',
-        headers: { 'Authorization': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+        },
         credentials: 'include',
     };
     return fetch(host + route, requestOptions)
