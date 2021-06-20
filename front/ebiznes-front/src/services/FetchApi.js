@@ -91,6 +91,7 @@ export function signOut() {
     const route = "signOut";
     const requestOptions = {
         method: 'POST',
+        headers: { 'Authorization': 'application/json' },
         credentials: 'include',
     };
     return fetch(host + route, requestOptions)
