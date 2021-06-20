@@ -108,7 +108,7 @@ class ItemCommentController @Inject()(itemCommentRepository: ItemCommentReposito
 
     val result = itemCommentRepository.getById(id)
     result.map(obj => {
-      val prodForm = updateForm.fill(UpdateItemCommentForm(obj.id, obj.comment_body, obj.product, obj.client))
+      val prodForm = updateForm.fill(UpdateItemCommentForm(obj.id, obj.commentBody, obj.product, obj.client))
       //  id, product.name, product.description, product.category)
       //updateProductForm.fill(prodForm)
       Ok(views.html.itemcommentupdate(prodForm))

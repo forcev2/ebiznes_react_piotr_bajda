@@ -94,9 +94,11 @@ export default function SignUp() {
           onClick={signUp}
         >
           Register
-          </button>
+        </button>
       </form>
-      { redirect ? (<Redirect push to="/login" />) : null}
+      {emailExists ? (<strong className="errr">Email already exists</strong>) : null}
+      {someEmpty ? (<strong className="errr">Fill in all empty fields</strong>) : null}
+      {redirect ? (<Redirect push to="/login" />) : null}
     </div>
   )
 }

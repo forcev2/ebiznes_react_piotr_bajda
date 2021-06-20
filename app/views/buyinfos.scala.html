@@ -3,7 +3,7 @@
 @for(product <- products) {
     <strong>@product.address</strong>
     @product.date
-    @product.total_price
+    @product.totalPrice
     <a href="@controllers.routes.BuyInfoController.update(product.id)">Edit</a>
     <a href="@controllers.routes.BuyInfoController.delete(product.id)">Delete</a>
 }

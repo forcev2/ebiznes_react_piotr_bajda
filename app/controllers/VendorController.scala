@@ -100,7 +100,7 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
 
     val result = vendorRepository.getById(id)
     result.map(obj => {
-      val prodForm = updateForm.fill(UpdateVendorForm(obj.id, obj.company_name, obj.user, obj.vendor_info))
+      val prodForm = updateForm.fill(UpdateVendorForm(obj.id, obj.companyName, obj.user, obj.vendorInfo))
       //  id, product.name, product.description, product.category)
       //updateProductForm.fill(prodForm)
       Ok(views.html.vendorupdate(prodForm))

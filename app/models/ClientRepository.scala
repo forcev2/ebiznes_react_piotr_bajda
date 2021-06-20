@@ -3,8 +3,6 @@ package models
 import javax.inject.{Inject, Singleton}
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
-//import slick.lifted.{TableQuery, Tag}
-//import slick.model.Table
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -23,7 +21,7 @@ class ClientRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider, 
     def name = column[String]("name")
     def surname = column[String]("surname")
     def user = column[Long]("user")
-    def user_fk = foreignKey("user_fk",user, us)(_.id)
+    def userFk = foreignKey("user_fk",user, us)(_.id)
     def * = (id, name, surname, user) <> ((Client.apply _).tupled, Client.unapply)
   }
 

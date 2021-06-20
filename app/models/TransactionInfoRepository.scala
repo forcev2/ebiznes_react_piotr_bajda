@@ -27,9 +27,9 @@ class TransactionInfoRepository @Inject() (val dbConfigProvider: DatabaseConfigP
     def product_fk = foreignKey("product_fk",product, prod)(_.id)
     def client = column[Int]("client")
     def client_fk = foreignKey("client_fk",client, cli)(_.id)
-    def buy_info = column[Int]("buy_info")
-    def buy_info_fk = foreignKey("buy_info_fk",buy_info, binf)(_.id)
-    def * = (id, date, product, client, buy_info) <> ((TransactionInfo.apply _).tupled, TransactionInfo.unapply)
+    def buyInfo = column[Int]("buy_info")
+    def buyInfoFK = foreignKey("buy_info_fk",buyInfo, binf)(_.id)
+    def * = (id, date, product, client, buyInfo) <> ((TransactionInfo.apply _).tupled, TransactionInfo.unapply)
   }
 
   import productRepository.ProductTable
@@ -42,11 +42,11 @@ class TransactionInfoRepository @Inject() (val dbConfigProvider: DatabaseConfigP
 
   val transactionInfo = TableQuery[TransactionInfoTable]
 
-  def create(date: String, product: Long, client: Int, buy_info: Int): Future[TransactionInfo] = db.run {
-    (transactionInfo.map(c => (c.date, c.product, c.client, c.buy_info))
+  def create(date: String, product: Long, client: Int, buyInfo: Int): Future[TransactionInfo] = db.run {
+    (transactionInfo.map(c => (c.date, c.product, c.client, c.buyInfo))
       returning transactionInfo.map(_.id)
-      into { case ((date,product, client, buy_info), id) => TransactionInfo(id, date, product, client, buy_info) }
-      ) += (date, product, client, buy_info)
+      into { case ((date,product, client, buyInfo), id) => TransactionInfo(id, date, product, client, buyInfo) }
+      ) += (date, product, client, buyInfo)
   }
 
   def list(): Future[Seq[TransactionInfo]] = db.run {

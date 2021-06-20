@@ -99,7 +99,7 @@ class VendorCommentController @Inject()(vendorCommentRepository: VendorCommentRe
 
     val result = vendorCommentRepository.getById(id)
     result.map(obj => {
-      val prodForm = updateForm.fill(UpdateVendorCommentForm(obj.id, obj.comment_body, obj.vendor, obj.client))
+      val prodForm = updateForm.fill(UpdateVendorCommentForm(obj.id, obj.commentBody, obj.vendor, obj.client))
       //  id, product.name, product.description, product.category)
       //updateProductForm.fill(prodForm)
       Ok(views.html.vendorcommentupdate(prodForm))

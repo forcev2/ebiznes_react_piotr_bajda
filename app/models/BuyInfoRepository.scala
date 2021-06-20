@@ -3,8 +3,6 @@ package models
 import javax.inject.{Inject, Singleton}
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
-//import slick.lifted.{TableQuery, Tag}
-//import slick.model.Table
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -20,8 +18,8 @@ class BuyInfoRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def date = column[String]("date")
     def address = column[String]("address")
-    def total_price = column[Int]("total_price")
-    def * = (id, date, address, total_price) <> ((BuyInfo.apply _).tupled, BuyInfo.unapply)
+    def totalPrice = column[Int]("total_price")
+    def * = (id, date, address, totalPrice) <> ((BuyInfo.apply _).tupled, BuyInfo.unapply)
   }
 
   import productRepository.ProductTable
@@ -30,11 +28,11 @@ class BuyInfoRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
 
   val buyInfo = TableQuery[BuyInfoTable]
 
-  def create(date: String, address: String, total_price: Int): Future[BuyInfo] = db.run {
-    (buyInfo.map(c => (c.date,  c.address, c.total_price))
+  def create(date: String, address: String, totalPrice: Int): Future[BuyInfo] = db.run {
+    (buyInfo.map(c => (c.date,  c.address, c.totalPrice))
       returning buyInfo.map(_.id)
-      into {case ((date, address, total_price), id) => BuyInfo(id, date, address, total_price) }
-      ) += (date, address, total_price)
+      into {case ((date, address, totalPrice), id) => BuyInfo(id, date, address, totalPrice) }
+      ) += (date, address, totalPrice)
   }
 
   def list(): Future[Seq[BuyInfo]] = db.run {

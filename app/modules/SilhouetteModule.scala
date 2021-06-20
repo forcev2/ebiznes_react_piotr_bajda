@@ -46,7 +46,6 @@ class SilhouetteModule extends AbstractModule with ScalaModule {
       }
     }
 
-  //def oAuthSettings : OAuth2Settings = new OAuth2Settings(redirectURL = "http://localhost:12345");
 
   override def configure(): Unit = {
     bind[Silhouette[DefaultEnv]].to[SilhouetteProvider[DefaultEnv]]

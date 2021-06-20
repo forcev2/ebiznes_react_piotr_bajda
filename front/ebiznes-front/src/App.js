@@ -25,7 +25,6 @@ import ShoppingCartComponent from './components/ShoppingCartComponent';
 
 
 function App() {
-  let [responseData, setResponseData] = React.useState('');
   const [state, setState] = useContext(AuthContext);
 
   const [cart, setCart] = useState([]);

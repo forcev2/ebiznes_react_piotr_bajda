@@ -102,7 +102,7 @@ class BuyInfoController @Inject()(buyInfoRepository: BuyInfoRepository, cc: Mess
 
     val result = buyInfoRepository.getById(id)
     result.map(obj => {
-      val prodForm = updateForm.fill(UpdateBuyInfoForm(obj.id, obj.date, obj.address, obj.total_price))
+      val prodForm = updateForm.fill(UpdateBuyInfoForm(obj.id, obj.date, obj.address, obj.totalPrice))
       //  id, product.name, product.description, product.category)
       //updateProductForm.fill(prodForm)
       Ok(views.html.buyinfoupdate(prodForm))

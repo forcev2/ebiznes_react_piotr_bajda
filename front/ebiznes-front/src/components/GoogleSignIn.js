@@ -5,8 +5,7 @@ import { signIn as signInFetch, signInGoogle } from '../services/FetchApi';
 export default function GoogleSignIn() {
 
     const responseGoogle = () => {
-        //window.location.href = "https://ebiznesdckrpb.azurewebsites.net/authenticate/google";
-        window.location.href = "http://localhost:12345/authenticate/google";
+        window.location.href = "https://ebiznesdckrpb.azurewebsites.net/authenticate/google";
     }
 
     return (

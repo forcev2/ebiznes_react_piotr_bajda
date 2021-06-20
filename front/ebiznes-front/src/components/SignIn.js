@@ -45,11 +45,11 @@ export default function SignIn() {
                         else {
                             return response.json()
                         }
-                        //console.log("from server login ", response);
                     })
                     .then((data) => {
                         console.log("data ", data);
-                        localStorage.setItem(data[0], data[1]);
+                        if (data)
+                            localStorage.setItem(data[0], data[1]);
                         console.log(Cookies.get())
                         setState({ email: email, isLoggedIn: true });
                         setRedirect(true);
@@ -99,7 +99,8 @@ export default function SignIn() {
             </form>
             <GoogleSignIn />
             <FacebookSignIn />
-
+            {wrongCreditials ? (<strong className="errr">Wrong Creditials</strong>) : null}
+            {someEmpty ? (<strong className="errr">Fill in all empty fields</strong>) : null}
             {redirect ? (<Redirect push to="/" />) : null}
         </div>
     )

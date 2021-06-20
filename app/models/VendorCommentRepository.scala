@@ -3,8 +3,6 @@ package models
 import javax.inject.{Inject, Singleton}
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
-//import slick.lifted.{TableQuery, Tag}
-//import slick.model.Table
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -22,9 +20,9 @@ class VendorCommentRepository @Inject() (val dbConfigProvider: DatabaseConfigPro
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def comment_body = column[String]("comment_body")
     def vendor = column[Int]("vendor")
-    def vendor_fk = foreignKey("vendor_fk",vendor, ven)(_.id)
+    def vendorFK = foreignKey("vendor_fk",vendor, ven)(_.id)
     def client = column[Int]("client")
-    def client_fk = foreignKey("client_fk",client, cli)(_.id)
+    def clientFK = foreignKey("client_fk",client, cli)(_.id)
     def * = (id, comment_body, vendor, client) <> ((VendorComment.apply _).tupled, VendorComment.unapply)
   }
 

@@ -3,8 +3,6 @@ package models
 import javax.inject.{Inject, Singleton}
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
-//import slick.lifted.{TableQuery, Tag}
-//import slick.model.Table
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -33,9 +31,9 @@ class ProductRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
 
     def vendor = column[Int]("vendor")
 
-    def category_fk = foreignKey("cat_fk",category, cat)(_.id)
+    def categoryFK = foreignKey("cat_fk",category, cat)(_.id)
 
-    def vendor_fk = foreignKey("vend_fk",vendor, vend)(_.id)
+    def vendorFK = foreignKey("vend_fk",vendor, vend)(_.id)
 
     /**
      * This is the tables default "projection".
@@ -93,8 +91,8 @@ class ProductRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
     product.filter(_.id === id).result
   }
 
-  def getByCategory(category_id: Int): Future[Seq[Product]] = db.run {
-    product.filter(_.category === category_id).result
+  def getByCategory(categoryId: Int): Future[Seq[Product]] = db.run {
+    product.filter(_.category === categoryId).result
   }
 
   def getById(id: Long): Future[Product] = db.run {
@@ -105,14 +103,14 @@ class ProductRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
     product.filter(_.id === id).result.headOption
   }
 
-  def getByCategories(category_ids: List[Int]): Future[Seq[Product]] = db.run {
-    product.filter(_.category inSet category_ids).result
+  def getByCategories(categoryIds: List[Int]): Future[Seq[Product]] = db.run {
+    product.filter(_.category inSet categoryIds).result
   }
 
   def delete(id: Long): Future[Unit] = db.run(product.filter(_.id === id).delete).map(_ => ())
 
-  def update(id: Long, new_product: Product): Future[Unit] = {
-    val productToUpdate: Product = new_product.copy(id)
+  def update(id: Long, newProduct: Product): Future[Unit] = {
+    val productToUpdate: Product = newProduct.copy(id)
     db.run(product.filter(_.id === id).update(productToUpdate)).map(_ => ())
   }
 

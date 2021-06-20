@@ -103,7 +103,7 @@ class TransactionInfoController @Inject()(transactionInfoRepository: Transaction
 
     val result = transactionInfoRepository.getById(id)
     result.map(obj => {
-      val prodForm = updateForm.fill(UpdateTransactionInfoForm(obj.id, obj.date, obj.product, obj.client, obj.buy_info))
+      val prodForm = updateForm.fill(UpdateTransactionInfoForm(obj.id, obj.date, obj.product, obj.client, obj.buyInfo))
       //  id, product.name, product.description, product.category)
       //updateProductForm.fill(prodForm)
       Ok(views.html.transactioninfoupdate(prodForm))
