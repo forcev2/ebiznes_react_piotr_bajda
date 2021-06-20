@@ -83,6 +83,8 @@ export function signIn(email, password) {
     const route = "signIn";
     const requestOptions = {
         method: 'POST',
+        crossDomain: true,
+        xhrFields: { withCredentials: true },
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email, password: password }),
         credentials: 'include',

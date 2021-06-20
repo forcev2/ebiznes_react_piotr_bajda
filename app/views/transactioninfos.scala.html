@@ -1,10 +1,10 @@
 @(products: Seq[TransactionInfo])
 
 @for(product <- products) {
-    <b>@product.date</b>
-    <b>@product.client</b>
-    <b>@product.product</b>
-    <b>@product.buy_info</b>
+    <strong>@product.date</strong>
+    <strong>@product.client</strong>
+    <strong>@product.product</strong>
+    <strong>@product.buy_info</strong>
     <a href="@controllers.routes.TransactionInfoController.update(product.id)">Edit</a>
     <a href="@controllers.routes.TransactionInfoController.delete(product.id)">Delete</a>
 }

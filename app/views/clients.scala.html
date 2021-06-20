@@ -1,9 +1,9 @@
 @(products: Seq[Client])
 
 @for(product <- products) {
-    <b>@product.name</b>
-    <b>@product.surname</b>
-    <b>@product.user</b>
+    <strong>@product.name</strong>
+    <strong>@product.surname</strong>
+    <strong>@product.user</strong>
     <a href="@controllers.routes.ClientController.update(product.id)">Edit</a>
     <a href="@controllers.routes.ClientController.delete(product.id)">Delete</a>
 }

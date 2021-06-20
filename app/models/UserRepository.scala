@@ -56,6 +56,10 @@ class UserRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implici
     user.filter(_.id === id).result.headOption
   }.map(_.map(dto => toModel(dto)))
 
+  def getByEmail(email: String): Future[Option[User]] = db.run {
+    user.filter(_.email === email).result.headOption
+  }.map(_.map(dto => toModel(dto)))
+
   def getById(id: Long): Future[User] = db.run {
     user.filter(_.id === id).result.head
   }.map(dto => toModel(dto))

@@ -44,17 +44,13 @@ export default function SignIn() {
                         }
                         else {
                             return response.json()
-                            const authenticator = Cookies.get("authenticator");
-                            console.log(authenticator);
-                            localStorage.setItem('email', email);
-                            setState({ email: email, isLoggedIn: true });
-                            setRedirect(true);
                         }
                         //console.log("from server login ", response);
                     })
                     .then((data) => {
                         console.log("data ", data);
                         localStorage.setItem(data[0], data[1]);
+                        console.log(Cookies.get())
                         setState({ email: email, isLoggedIn: true });
                         setRedirect(true);
                     });

@@ -1,7 +1,7 @@
 @(products: Seq[BuyInfo])
 
 @for(product <- products) {
-    <b>@product.address</b>
+    <strong>@product.address</strong>
     @product.date
     @product.total_price
     <a href="@controllers.routes.BuyInfoController.update(product.id)">Edit</a>
