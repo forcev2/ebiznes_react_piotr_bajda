@@ -47,7 +47,7 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
         )
       },
       obj => {
-        vendorRepository.create(obj.company_name, obj.user, obj.vendor_info).map { _ =>
+        vendorRepository.create(obj.companyName, obj.user, obj.vendorInfo).map { _ =>
           Redirect(routes.VendorController.add).flashing("success" -> "created")
         }
       }
@@ -55,8 +55,8 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
 
   }
 
-  def addJSON(company_name: String,  user: Long, vendor_info: Int): Action[AnyContent] = Action.async { implicit request =>
-    vendorRepository.create(company_name, user, vendor_info).map {
+  def addJSON(companyName: String,  user: Long, vendorInfo: Int): Action[AnyContent] = Action.async { implicit request =>
+    vendorRepository.create(companyName, user, vendorInfo).map {
       res => Ok(Json.toJson(res))
     }
   }
@@ -67,8 +67,8 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
     }
   }
 
-  def updateJSON(id: Int, company_name: String,  user: Long, vendor_info: Int): Action[AnyContent] = Action.async { implicit request =>
-    vendorRepository.update(id, new Vendor(id, company_name, user, vendor_info)).map {
+  def updateJSON(id: Int, companyName: String,  user: Long, vendorInfo: Int): Action[AnyContent] = Action.async { implicit request =>
+    vendorRepository.update(id, new Vendor(id, companyName, user, vendorInfo)).map {
       res => Ok(Json.toJson(id))
     }
   }
@@ -117,7 +117,7 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
         )
       },
       obj => {
-        vendorRepository.update(obj.id, Vendor(obj.id, obj.company_name, obj.user, obj.vendor_info)).map { _ =>
+        vendorRepository.update(obj.id, Vendor(obj.id, obj.companyName, obj.user, obj.vendorInfo)).map { _ =>
           Redirect(routes.VendorController.update(obj.id)).flashing("success" -> " updated")
         }
       }
@@ -132,5 +132,5 @@ class VendorController @Inject()(vendorRepository: VendorRepository, cc: Message
 }
 
 
-case class CreateVendorForm(company_name: String,  user: Long, vendor_info: Int)
-case class UpdateVendorForm(id: Int, company_name: String,  user: Long, vendor_info: Int)
+case class CreateVendorForm(companyName: String,  user: Long, vendorInfo: Int)
+case class UpdateVendorForm(id: Int, companyName: String,  user: Long, vendorInfo: Int)

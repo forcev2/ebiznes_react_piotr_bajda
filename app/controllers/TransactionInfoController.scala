@@ -49,7 +49,7 @@ class TransactionInfoController @Inject()(transactionInfoRepository: Transaction
         )
       },
       obj => {
-        transactionInfoRepository.create(obj.date, obj.product, obj.client, obj.buy_info).map { _ =>
+        transactionInfoRepository.create(obj.date, obj.product, obj.client, obj.buyInfo).map { _ =>
           Redirect(routes.TransactionInfoController.add).flashing("success" -> "created")
         }
       }
@@ -57,8 +57,8 @@ class TransactionInfoController @Inject()(transactionInfoRepository: Transaction
 
   }
 
-  def addJSON(date: String, product: Long, client: Int, buy_info: Int): Action[AnyContent] = Action.async { implicit request =>
-    transactionInfoRepository.create(date, product, client, buy_info).map {
+  def addJSON(date: String, product: Long, client: Int, buyInfo: Int): Action[AnyContent] = Action.async { implicit request =>
+    transactionInfoRepository.create(date, product, client, buyInfo).map {
       res => Ok(Json.toJson(res))
     }
   }
@@ -69,8 +69,8 @@ class TransactionInfoController @Inject()(transactionInfoRepository: Transaction
     }
   }
 
-  def updateJSON(id: Int, date: String, product: Long, client: Int, buy_info: Int): Action[AnyContent] = Action.async { implicit request =>
-    transactionInfoRepository.update(id, new TransactionInfo(id, date, product, client, buy_info)).map {
+  def updateJSON(id: Int, date: String, product: Long, client: Int, buyInfo: Int): Action[AnyContent] = Action.async { implicit request =>
+    transactionInfoRepository.update(id, new TransactionInfo(id, date, product, client, buyInfo)).map {
       res => Ok(Json.toJson(id))
     }
   }
@@ -120,7 +120,7 @@ class TransactionInfoController @Inject()(transactionInfoRepository: Transaction
         )
       },
       obj => {
-        transactionInfoRepository.update(obj.id, TransactionInfo(obj.id, obj.date, obj.product, obj.client, obj.buy_info)).map { _ =>
+        transactionInfoRepository.update(obj.id, TransactionInfo(obj.id, obj.date, obj.product, obj.client, obj.buyInfo)).map { _ =>
           Redirect(routes.TransactionInfoController.update(obj.id)).flashing("success" -> " updated")
         }
       }
@@ -135,5 +135,5 @@ class TransactionInfoController @Inject()(transactionInfoRepository: Transaction
 }
 
 
-case class CreateTransactionInfoForm(date: String, product: Long, client: Int, buy_info: Int)
-case class UpdateTransactionInfoForm(id: Int, date: String, product: Long, client: Int, buy_info: Int)
+case class CreateTransactionInfoForm(date: String, product: Long, client: Int, buyInfo: Int)
+case class UpdateTransactionInfoForm(id: Int, date: String, product: Long, client: Int, buyInfo: Int)

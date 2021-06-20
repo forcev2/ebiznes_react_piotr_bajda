@@ -49,7 +49,7 @@ class BuyInfoController @Inject()(buyInfoRepository: BuyInfoRepository, cc: Mess
         )
       },
       obj => {
-        buyInfoRepository.create(obj.address, obj.date, obj.total_price).map { _ =>
+        buyInfoRepository.create(obj.address, obj.date, obj.totalPrice).map { _ =>
           Redirect(routes.BuyInfoController.add).flashing("success" -> "created")
         }
       }
@@ -57,8 +57,8 @@ class BuyInfoController @Inject()(buyInfoRepository: BuyInfoRepository, cc: Mess
 
   }
 
-  def addJSON(date: String, address: String, total_price: Int): Action[AnyContent] = Action.async { implicit request =>
-    buyInfoRepository.create(date, address, total_price).map {
+  def addJSON(date: String, address: String, totalPrice: Int): Action[AnyContent] = Action.async { implicit request =>
+    buyInfoRepository.create(date, address, totalPrice).map {
       res => Ok(Json.toJson(res))
     }
   }
@@ -69,8 +69,8 @@ class BuyInfoController @Inject()(buyInfoRepository: BuyInfoRepository, cc: Mess
     }
   }
 
-  def updateJSON(id: Int, date: String, address: String, total_price: Int): Action[AnyContent] = Action.async { implicit request =>
-    buyInfoRepository.update(id, new BuyInfo(id, date, address, total_price)).map {
+  def updateJSON(id: Int, date: String, address: String, totalPrice: Int): Action[AnyContent] = Action.async { implicit request =>
+    buyInfoRepository.update(id, new BuyInfo(id, date, address, totalPrice)).map {
       res => Ok(Json.toJson(id))
     }
   }
@@ -119,7 +119,7 @@ class BuyInfoController @Inject()(buyInfoRepository: BuyInfoRepository, cc: Mess
         )
       },
       obj => {
-        buyInfoRepository.update(obj.id, BuyInfo(obj.id, obj.date, obj.address, obj.total_price)).map { _ =>
+        buyInfoRepository.update(obj.id, BuyInfo(obj.id, obj.date, obj.address, obj.totalPrice)).map { _ =>
           Redirect(routes.BuyInfoController.update(obj.id)).flashing("success" -> " updated")
         }
       }
@@ -132,5 +132,5 @@ class BuyInfoController @Inject()(buyInfoRepository: BuyInfoRepository, cc: Mess
   }
 
 }
-case class CreateBuyInfoForm(date: String, address: String, total_price: Int)
-case class UpdateBuyInfoForm(id: Int, date: String, address: String, total_price: Int)
+case class CreateBuyInfoForm(date: String, address: String, totalPrice: Int)
+case class UpdateBuyInfoForm(id: Int, date: String, address: String, totalPrice: Int)

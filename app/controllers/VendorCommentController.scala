@@ -47,7 +47,7 @@ class VendorCommentController @Inject()(vendorCommentRepository: VendorCommentRe
         )
       },
       obj => {
-        vendorCommentRepository.create(obj.comment_body, obj.vendor, obj.client).map { _ =>
+        vendorCommentRepository.create(obj.commentBody, obj.vendor, obj.client).map { _ =>
           Redirect(routes.VendorCommentController.add).flashing("success" -> "created")
         }
       }
@@ -55,8 +55,8 @@ class VendorCommentController @Inject()(vendorCommentRepository: VendorCommentRe
 
   }
 
-  def addJSON( comment_body: String, vendor: Int, client: Int): Action[AnyContent] = Action.async { implicit request =>
-    vendorCommentRepository.create(comment_body, vendor, client).map {
+  def addJSON( commentBody: String, vendor: Int, client: Int): Action[AnyContent] = Action.async { implicit request =>
+    vendorCommentRepository.create(commentBody, vendor, client).map {
       res => Ok(Json.toJson(res))
     }
   }
@@ -67,8 +67,8 @@ class VendorCommentController @Inject()(vendorCommentRepository: VendorCommentRe
     }
   }
 
-  def updateJSON(id: Int, comment_body: String, vendor: Int, client: Int): Action[AnyContent] = Action.async { implicit request =>
-    vendorCommentRepository.update(id, new VendorComment(id, comment_body, vendor, client)).map {
+  def updateJSON(id: Int, commentBody: String, vendor: Int, client: Int): Action[AnyContent] = Action.async { implicit request =>
+    vendorCommentRepository.update(id, new VendorComment(id, commentBody, vendor, client)).map {
       res => Ok(Json.toJson(id))
     }
   }
@@ -116,7 +116,7 @@ class VendorCommentController @Inject()(vendorCommentRepository: VendorCommentRe
         )
       },
       obj => {
-        vendorCommentRepository.update(obj.id, VendorComment(obj.id, obj.comment_body, obj.vendor, obj.client)).map { _ =>
+        vendorCommentRepository.update(obj.id, VendorComment(obj.id, obj.commentBody, obj.vendor, obj.client)).map { _ =>
           Redirect(routes.VendorController.update(obj.id)).flashing("success" -> " updated")
         }
       }
@@ -130,5 +130,5 @@ class VendorCommentController @Inject()(vendorCommentRepository: VendorCommentRe
 
 }
 
-case class CreateVendorCommentForm(comment_body: String, vendor: Int, client: Int)
-case class UpdateVendorCommentForm(id: Int, comment_body: String, vendor: Int, client: Int)
+case class CreateVendorCommentForm(commentBody: String, vendor: Int, client: Int)
+case class UpdateVendorCommentForm(id: Int, commentBody: String, vendor: Int, client: Int)

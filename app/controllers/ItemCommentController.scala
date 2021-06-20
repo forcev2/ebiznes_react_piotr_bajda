@@ -48,7 +48,7 @@ class ItemCommentController @Inject()(itemCommentRepository: ItemCommentReposito
         )
       },
       obj => {
-        itemCommentRepository.create(obj.comment_body, obj.product, obj.client).map { _ =>
+        itemCommentRepository.create(obj.commentBody, obj.product, obj.client).map { _ =>
           Redirect(routes.ItemCommentController.add).flashing("success" -> "created")
         }
       }
@@ -56,8 +56,8 @@ class ItemCommentController @Inject()(itemCommentRepository: ItemCommentReposito
 
   }
 
-  def addJSON( comment_body: String, product: Long, client: Int): Action[AnyContent] = Action.async { implicit request =>
-    itemCommentRepository.create(comment_body, product, client).map {
+  def addJSON( commentBody: String, product: Long, client: Int): Action[AnyContent] = Action.async { implicit request =>
+    itemCommentRepository.create(commentBody, product, client).map {
       res => Ok(Json.toJson(res))
     }
   }
@@ -69,8 +69,8 @@ class ItemCommentController @Inject()(itemCommentRepository: ItemCommentReposito
     }
   }
 
-  def updateJSON(id: Int, comment_body: String, product: Long, client: Int): Action[AnyContent] = Action.async { implicit request =>
-    itemCommentRepository.update(id, new ItemComment(id,comment_body, product, client)).map {
+  def updateJSON(id: Int, commentBody: String, product: Long, client: Int): Action[AnyContent] = Action.async { implicit request =>
+    itemCommentRepository.update(id, new ItemComment(id,commentBody, product, client)).map {
       res => Ok(Json.toJson(id))
     }
   }
@@ -125,7 +125,7 @@ class ItemCommentController @Inject()(itemCommentRepository: ItemCommentReposito
         )
       },
       obj => {
-        itemCommentRepository.update(obj.id, ItemComment(obj.id, obj.comment_body, obj.product, obj.client)).map { _ =>
+        itemCommentRepository.update(obj.id, ItemComment(obj.id, obj.commentBody, obj.product, obj.client)).map { _ =>
           Redirect(routes.ItemCommentController.update(obj.id)).flashing("success" -> " updated")
         }
       }
@@ -139,5 +139,5 @@ class ItemCommentController @Inject()(itemCommentRepository: ItemCommentReposito
 
 }
 
-case class CreateItemCommentForm(comment_body: String, product: Long, client: Int)
-case class UpdateItemCommentForm(id: Int, comment_body: String, product: Long, client: Int)
+case class CreateItemCommentForm(commentBody: String, product: Long, client: Int)
+case class UpdateItemCommentForm(id: Int, commentBody: String, product: Long, client: Int)

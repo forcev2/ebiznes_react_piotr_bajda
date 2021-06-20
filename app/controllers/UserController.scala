@@ -75,11 +75,11 @@ class UserController @Inject()(userRepository: UserRepository, cc: MessagesContr
   }
 
   def getJSON() = Action { implicit request =>
-    Ok("STRING Create")
+    Ok("STRING get JSON")
   }
 
   def get() = Action { implicit request =>
-    Ok("STRING Create")
+    Ok("STRING get")
   }
 
   /**

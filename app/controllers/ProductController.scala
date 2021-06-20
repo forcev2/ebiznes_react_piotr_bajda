@@ -43,10 +43,8 @@ class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo:
 
   def addProductHandle = Action.async { implicit request =>
     var categ:Seq[Category] = Seq[Category]()
-    val categories = categoryRepo.list().onComplete{
-      case Success(cat) => categ = cat
-      case Failure(_) => print("fail")
-    }
+
+
 
     productForm.bindFromRequest.fold(
       errorForm => {
@@ -106,10 +104,6 @@ class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo:
 
   def update(id: Long): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
     var categ:Seq[Category] = Seq[Category]()
-    val categories = categoryRepo.list().onComplete{
-      case Success(cat) => categ = cat
-      case Failure(_) => print("fail")
-    }
 
     val produkt = productsRepo.getById(id)
     produkt.map(product => {
@@ -122,10 +116,7 @@ class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo:
 
   def updateProductHandle = Action.async { implicit request =>
     var categ:Seq[Category] = Seq[Category]()
-    val categories = categoryRepo.list().onComplete{
-      case Success(cat) => categ = cat
-      case Failure(_) => print("fail")
-    }
+
 
     updateProductForm.bindFromRequest.fold(
       errorForm => {
