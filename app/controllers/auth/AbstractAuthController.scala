@@ -14,7 +14,7 @@ abstract class AbstractAuthController(scc: DefaultSilhouetteControllerComponents
     authenticatorService.create(user.loginInfo)
       .flatMap { authenticator =>
         authenticatorService.init(authenticator).flatMap { v =>
-          authenticatorService.embed(v, Ok(Json.toJson(user, name, value)))
+          authenticatorService.embed(v, Ok(Json.toJson(name, value)))
         }
       }
   }
