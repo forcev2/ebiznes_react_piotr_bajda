@@ -18,12 +18,12 @@ class VendorCommentRepository @Inject() (val dbConfigProvider: DatabaseConfigPro
 
   class VendorCommentTable(tag: Tag) extends Table[VendorComment](tag, "vendor_comment") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
-    def comment_body = column[String]("comment_body")
+    def commentBody = column[String]("comment_body")
     def vendor = column[Int]("vendor")
     def vendorFK = foreignKey("vendor_fk",vendor, ven)(_.id)
     def client = column[Int]("client")
     def clientFK = foreignKey("client_fk",client, cli)(_.id)
-    def * = (id, comment_body, vendor, client) <> ((VendorComment.apply _).tupled, VendorComment.unapply)
+    def * = (id, commentBody, vendor, client) <> ((VendorComment.apply _).tupled, VendorComment.unapply)
   }
 
   import vendorRepository.VendorTable
@@ -36,11 +36,11 @@ class VendorCommentRepository @Inject() (val dbConfigProvider: DatabaseConfigPro
 
   protected val vendorComment = TableQuery[VendorCommentTable]
 
-  def create(comment_body: String, vendor: Int, client: Int): Future[VendorComment] = db.run {
-    (vendorComment.map(c => (c.comment_body, c.vendor, c.client))
+  def create(commentBody: String, vendor: Int, client: Int): Future[VendorComment] = db.run {
+    (vendorComment.map(c => (c.commentBody, c.vendor, c.client))
       returning vendorComment.map(_.id)
-      into {case ((comment_body, vendor, client), id) => VendorComment(id, comment_body, vendor, client) }
-      ) += (comment_body, vendor, client)
+      into {case ((commentBody, vendor, client), id) => VendorComment(id, commentBody, vendor, client) }
+      ) += (commentBody, vendor, client)
   }
 
   def list(): Future[Seq[VendorComment]] = db.run {

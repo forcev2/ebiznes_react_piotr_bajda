@@ -1,19 +1,9 @@
-import { getProduct, getSpecificProduct } from '../services/FetchApi';
+import { addComment, getSpecificProduct } from '../services/FetchApi';
 import React, { useState, useContext } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useLocation
-} from "react-router-dom";
 import ItemComments from './ItemComment';
 import { AuthContext } from '../AuthStore'
-import { addComment } from '../services/FetchApi';
-import { set } from 'js-cookie';
 
 function Product(props) {
-  const location = useLocation()
   const par_id = props.match.params.id;
   let [responseData, setResponseData] = React.useState('');
   const [state, setState] = useContext(AuthContext);
@@ -27,11 +17,14 @@ function Product(props) {
       .catch((error) => {
         console.log(error)
       })
-  }, [setResponseData, responseData])
+  }, [])
 
   const postComment = (id) => {
-    addComment(comment, id);
-    console.log(comment, id);
+    addComment(comment, id).then(response => {
+      if (response.status == 200) {
+        window.location.reload();
+      }
+    })
   }
 
   return (

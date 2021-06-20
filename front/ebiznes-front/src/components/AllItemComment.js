@@ -1,5 +1,5 @@
 import { getItemComment } from '../services/FetchApi';
-import React, { useState } from 'react';
+import React from 'react';
 
 function AllItemComments() {
   let [responseData, setResponseData] = React.useState('');
@@ -8,11 +8,12 @@ function AllItemComments() {
     getItemComment()
       .then((json) => {
         setResponseData(json)
+        console.log(json)
       })
       .catch((error) => {
         console.log(error)
       })
-  }, [setResponseData, responseData])
+  }, [])
 
   return (
     <div className="ItemComment">
@@ -23,7 +24,7 @@ function AllItemComments() {
         <ul>
           {responseData && responseData.map(obj => (
             <li>
-              {obj.comment_body},{obj.product} , {obj.client}
+              {obj.commentBody},{obj.product} , {obj.client}
             </li>))}
         </ul>
       </pre>

@@ -12,7 +12,7 @@ function Clients() {
       .catch((error) => {
         console.log(error)
       })
-  }, [setResponseData, responseData])
+  }, [])
 
   return (
     <div className="Clients">

@@ -20,9 +20,9 @@ class ItemCommentRepository @Inject() (val dbConfigProvider: DatabaseConfigProvi
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def commentBody = column[String]("comment_body")
     def product = column[Long]("product")
-    def product_fk = foreignKey("product_fk",product, prod)(_.id)
+    def productFK = foreignKey("product_fk",product, prod)(_.id)
     def client = column[Int]("client")
-    def client_fk = foreignKey("client_fk",client, cli)(_.id)
+    def clientFk = foreignKey("client_fk",client, cli)(_.id)
     def * = (id, commentBody, product, client) <> ((ItemComment.apply _).tupled, ItemComment.unapply)
   }
 

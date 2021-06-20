@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-import getClients from './services/FetchApi';
 import React, { useState, useContext } from 'react';
 import './App.css';
 import Products from './components/Products';

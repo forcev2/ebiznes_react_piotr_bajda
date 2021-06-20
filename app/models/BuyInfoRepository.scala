@@ -41,8 +41,8 @@ class BuyInfoRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
 
   def delete(id: Int): Future[Unit] = db.run(buyInfo.filter(_.id === id).delete).map(_ => ())
 
-  def update(id: Int, new_buyInfo: BuyInfo): Future[Unit] = {
-    val toUpdate: BuyInfo = new_buyInfo.copy(id)
+  def update(id: Int, newBuyInfo: BuyInfo): Future[Unit] = {
+    val toUpdate: BuyInfo = newBuyInfo.copy(id)
     db.run(buyInfo.filter(_.id === id).update(toUpdate)).map(_ => ())
   }
 

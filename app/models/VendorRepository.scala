@@ -18,12 +18,12 @@ class VendorRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
 
   class VendorTable(tag: Tag) extends Table[Vendor](tag, "vendor") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
-    def company_name = column[String]("company_name")
+    def companyName = column[String]("company_name")
     def user = column[Long]("user")
     def userFK = foreignKey("user_fk",user, us)(_.id)
     def vendorInfo = column[Int]("vendor_info")
     def vendorInfoFk = foreignKey("vendor_info_fk",vendorInfo, ven)(_.id)
-    def * = (id, company_name, user, vendorInfo) <> ((Vendor.apply _).tupled, Vendor.unapply)
+    def * = (id, companyName, user, vendorInfo) <> ((Vendor.apply _).tupled, Vendor.unapply)
   }
 
   import userRepository.UserTable
@@ -36,11 +36,11 @@ class VendorRepository @Inject() (val dbConfigProvider: DatabaseConfigProvider,
 
   protected val vendor = TableQuery[VendorTable]
 
-  def create(company_name: String, user: Long, vendorInfo: Int): Future[Vendor] = db.run {
-    (vendor.map(c => (c.company_name, c.user, c.vendorInfo))
+  def create(companyName: String, user: Long, vendorInfo: Int): Future[Vendor] = db.run {
+    (vendor.map(c => (c.companyName, c.user, c.vendorInfo))
       returning vendor.map(_.id)
-      into {case ((company_name, user, vendorInfo), id) => Vendor(id, company_name, user, vendorInfo) }
-      ) += (company_name, user, vendorInfo)
+      into {case ((companyName, user, vendorInfo), id) => Vendor(id, companyName, user, vendorInfo) }
+      ) += (companyName, user, vendorInfo)
   }
 
   def list(): Future[Seq[Vendor]] = db.run {

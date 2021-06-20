@@ -1,6 +1,4 @@
 import React from 'react'
-import { GoogleLogin } from 'react-google-login';
-import { signIn as signInFetch, signInGoogle } from '../services/FetchApi';
 
 export default function GoogleSignIn() {
 

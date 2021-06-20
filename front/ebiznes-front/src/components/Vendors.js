@@ -12,7 +12,7 @@ function Vendors() {
       .catch((error) => {
         console.log(error)
       })
-  }, [setResponseData, responseData])
+  }, [])
 
   return (
     <div className="Vendors">
@@ -23,7 +23,7 @@ function Vendors() {
         <ul>
           {responseData && responseData.map(obj => (
             <li>
-              {obj.company_name}
+              {obj.companyName}
             </li>))}
         </ul>
       </pre>

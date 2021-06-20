@@ -12,7 +12,7 @@ function VendorInfo() {
       .catch((error) => {
         console.log(error)
       })
-  }, [setResponseData, responseData])
+  }, [])
 
   return (
     <div className="VendorInfo">

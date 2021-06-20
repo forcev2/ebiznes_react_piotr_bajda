@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { signIn } from './services/FetchApi';
 import Cookies from 'js-cookie';
 
 

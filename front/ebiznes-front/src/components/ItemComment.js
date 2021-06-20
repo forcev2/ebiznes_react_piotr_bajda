@@ -1,6 +1,5 @@
 import { getItemCommentsByProductId } from '../services/FetchApi';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 function ItemComments(props) {
   let [responseData, setResponseData] = React.useState('');
@@ -15,7 +14,7 @@ function ItemComments(props) {
       .catch((error) => {
         console.log(error)
       })
-  }, [setResponseData, responseData])
+  }, [])
 
   return (
     <div className="ItemComments">
@@ -23,7 +22,7 @@ function ItemComments(props) {
 
         {responseData && responseData.map(obj => (
           <div className="product-card product-comment">
-            {obj.comment_body}
+            {obj.commentBody}
           </div>
         ))}
       </pre>
