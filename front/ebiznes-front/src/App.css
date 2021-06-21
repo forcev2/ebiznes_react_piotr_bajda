@@ -115,6 +115,10 @@ a{
   }
 }
 
+.email-size{
+  font-size: 12px;  
+}
+
 .padding-menu{
   height: 250px;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './App.css';
 import Products from './components/Products';
 import Clients from './components/Clients';
@@ -37,6 +37,37 @@ function App() {
     hardCopy = hardCopy.filter((cartItem) => cartItem.id !== product.id);
     setCart(hardCopy);
   };
+
+  const readUrlParamsFromAuthentication = () => {
+    var url_string = window.location.href; //window.location.href
+    var url = new URL(url_string);
+    var userStr = url.searchParams.get("user-id");
+
+    var userId = null;
+    var userEmail = null;
+    if (userStr && userStr.startsWith("User(")) {
+      var ind1 = userStr.lastIndexOf("User(") + 5;
+      var ind2 = userStr.indexOf(",");
+      userId = userStr.substring(ind1, ind2);
+
+      ind1 = userStr.lastIndexOf("),") + 2;
+      ind2 = userStr.lastIndexOf(")");
+
+      userEmail = userStr.substring(ind1, ind2);
+
+      localStorage.setItem("email", userEmail);
+      localStorage.setItem("isLoggedIn", true);
+      localStorage.setItem("userId", userId);
+      setState({ email: userEmail, isLoggedIn: true, userId: userId })
+    }
+
+    console.log(" user id =", userId, "email =", userEmail);
+
+  }
+
+  useEffect(() => {
+    readUrlParamsFromAuthentication();
+  }, [])
 
 
   return (
@@ -85,6 +116,11 @@ function App() {
           }
           {state.isLoggedIn &&
             <SignOut />
+          }
+          {state.isLoggedIn &&
+            <div className="menu-item email-size">
+              {state.email}
+            </div>
           }
 
         </div>

@@ -18,18 +18,14 @@ const Store = ({ children }) => {
 
     useEffect(() => {
         const email = localStorage.getItem('email');
+        const id = localStorage.getItem('userId');
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
         const checkSession = Cookies.get();
-        const authenticator = Cookies.get("authenticator");
-        console.log(checkSession)
-        console.log(authenticator)
-        if (authenticator) {
-            setState({ email: email, isLoggedIn: true })
-        }
-        else {
-            setState({ email: email, isLoggedIn: false })
-        }
+        //const authenticator = Cookies.get("authenticator");
+        //console.log(checkSession)
+        //console.log(authenticator)
 
-        console.log(email);
+        setState({ email: email, isLoggedIn: isLoggedIn, userId: id })
     }, [])
 
     return (

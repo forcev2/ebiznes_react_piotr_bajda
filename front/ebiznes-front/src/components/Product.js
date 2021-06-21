@@ -20,7 +20,7 @@ function Product(props) {
   }, [])
 
   const postComment = (id) => {
-    addComment(comment, id).then(response => {
+    addComment(comment, id, state.id).then(response => {
       if (response.status == 200) {
         window.location.reload();
       }

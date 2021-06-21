@@ -42,17 +42,21 @@ export default function SignIn() {
                             console.log(response);
                             setWrongCreditials(true);
                         }
-                        else {
-                            return response.json()
-                        }
+
+                        return response.json()
                     })
                     .then((data) => {
-                        console.log("data ", data);
-                        if (data)
-                            localStorage.setItem(data[0], data[1]);
-                        console.log(Cookies.get())
-                        setState({ email: email, isLoggedIn: true });
-                        setRedirect(true);
+                        if (data != "Provider Exception") {
+                            console.log("data ", data);
+                            if (data) {
+                                localStorage.setItem("email", data.email);
+                                localStorage.setItem("isLoggedIn", true);
+                                localStorage.setItem("userId", data.id);
+                                setState({ email: data.email, isLoggedIn: true, userId: data.id });
+                            }
+                            setRedirect(true);
+                        }
+
                     });
             }
 

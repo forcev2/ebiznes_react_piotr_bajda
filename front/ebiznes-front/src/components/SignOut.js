@@ -8,18 +8,11 @@ export default function SignOut() {
 
     const signOut = async () => {
         signOutFetch().then((response) => {
-            if (response.status != 200) {
-                console.log("Already Logged In")
+            localStorage.removeItem('email');
+            localStorage.removeItem('userId');
+            localStorage.removeItem("isLoggedIn");
+            setState({ email: "", isLoggedIn: false, userId: null })
 
-                const authenticator = Cookies.get("authenticator");
-                if (authenticator) {
-                    setState({ email: '', isLoggedIn: true });
-                }
-            }
-            else {
-                localStorage.removeItem('email');
-                setState({ email: '', isLoggedIn: false });
-            }
             console.log("from server logout ", response);
         })
 

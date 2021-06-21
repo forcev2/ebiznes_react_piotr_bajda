@@ -121,9 +121,9 @@ export function signInGoogle() {
 }
 
 
-export function addComment(commentBody, productId) {
+export function addComment(commentBody, productId, userId) {
     const host = "https://ebiznesdckrpb.azurewebsites.net/"
-    const route = "addJSON/" + commentBody + "/" + productId + "/" + 0;
+    const route = "addJSON/" + commentBody + "/" + productId + "/" + userId;
     console.log(route);
     const requestOptions = {
         method: 'POST',
