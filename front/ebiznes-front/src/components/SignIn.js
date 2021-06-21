@@ -2,10 +2,8 @@ import React, { useContext } from 'react'
 import { signIn as signInFetch } from '../services/FetchApi';
 import { Redirect } from 'react-router-dom';
 import { AuthContext } from '../AuthStore'
-import { GoogleLogin } from 'react-google-login';
 import GoogleSignIn from './GoogleSignIn';
 import FacebookSignIn from './FacebookSignIn';
-import Cookies from 'js-cookie';
 
 export default function SignIn() {
     let [someEmpty, setSomeEmpty] = React.useState(false);

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../AuthStore'
 import { signOut as signOutFetch } from '../services/FetchApi';
-import Cookies from 'js-cookie';
 
 export default function SignOut() {
     const [state, setState] = useContext(AuthContext)

@@ -2,9 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Products from './components/Products';
-import Clients from './components/Clients';
-import Vendors from './components/Vendors';
 import reportWebVitals from './reportWebVitals';
 import Store from './AuthStore';
 
