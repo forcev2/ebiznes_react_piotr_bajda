@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
 
 
 const initialState = {
@@ -20,10 +19,6 @@ const Store = ({ children }) => {
         const email = localStorage.getItem('email');
         const id = localStorage.getItem('userId');
         const isLoggedIn = localStorage.getItem('isLoggedIn');
-        const checkSession = Cookies.get();
-        //const authenticator = Cookies.get("authenticator");
-        //console.log(checkSession)
-        //console.log(authenticator)
 
         setState({ email: email, isLoggedIn: isLoggedIn, userId: id })
     }, [])

@@ -1,5 +1,5 @@
 import { getClients } from '../services/FetchApi';
-import React, { useState } from 'react';
+import React from 'react';
 
 function Clients() {
   let [responseData, setResponseData] = React.useState('');

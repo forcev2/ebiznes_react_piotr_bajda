@@ -1,6 +1,6 @@
 import { addComment, getSpecificProduct } from '../services/FetchApi';
 import React, { useState, useContext } from 'react';
-import ItemComments from './ItemComment';
+import ItemComments from './ItemComments';
 import { AuthContext } from '../AuthStore'
 
 function Product(props) {
@@ -20,7 +20,7 @@ function Product(props) {
   }, [])
 
   const postComment = (id) => {
-    addComment(comment, id, state.id).then(response => {
+    addComment(comment, id, state.userId).then(response => {
       if (response.status == 200) {
         window.location.reload();
       }
